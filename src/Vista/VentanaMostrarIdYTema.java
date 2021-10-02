@@ -9,6 +9,7 @@ import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
 import Modelo.Consulta;
 import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JFrame;
 
 /**
@@ -44,13 +45,13 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaConsulta = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
-        fieldTema = new javax.swing.JTextField();
-        fieldId = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         botonMostrarConsultas = new javax.swing.JButton();
         botonVolverMenu1 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        boxTemas = new javax.swing.JComboBox();
+        boxID = new javax.swing.JComboBox();
 
         botonVolverMenu.setText("Volver menu");
         botonVolverMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -59,7 +60,7 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
             }
         });
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,18 +75,6 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Ingrese filtros:");
-
-        fieldTema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldTemaActionPerformed(evt);
-            }
-        });
-
-        fieldId.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldIdActionPerformed(evt);
-            }
-        });
 
         jLabel3.setText("ID ");
 
@@ -107,20 +96,33 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
 
         jLabel4.setText("Ingrese el tema y la id deseada:");
 
+        boxTemas.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                boxTemasItemStateChanged(evt);
+            }
+        });
+        boxTemas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxTemasActionPerformed(evt);
+            }
+        });
+
+        boxID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                boxIDActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 864, Short.MAX_VALUE)
-                .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(79, 79, 79)
-                .addComponent(fieldTema, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(95, 95, 95)
+                .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(116, 116, 116))
+                .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(129, 129, 129))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(113, 113, 113)
                 .addComponent(jLabel2)
@@ -128,7 +130,7 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                 .addComponent(jLabel3)
                 .addGap(152, 152, 152))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(369, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -141,6 +143,10 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                             .addComponent(botonMostrarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
                         .addGap(361, 361, 361))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -150,18 +156,21 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fieldTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(fieldId, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel2))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)))
                 .addComponent(botonMostrarConsultas)
                 .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 56, Short.MAX_VALUE)
-                .addGap(29, 29, 29)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(botonVolverMenu1)
                 .addContainerGap())
         );
@@ -169,21 +178,9 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void fieldTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldTemaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldTemaActionPerformed
-
-    private void fieldIdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldIdActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldIdActionPerformed
-
     private void botonMostrarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarConsultasActionPerformed
-        if (manejo.existeIdEnConsultas(fieldTema.getText(), Integer.parseInt(fieldId.getText()))==false) {
-            this.error = new VentanaErrorField();
-            error.setVisible(true);
-        }else{
-            mostrarConsultaTemaID();
-        }
+
+        mostrarConsultaTemaID();
         
     }//GEN-LAST:event_botonMostrarConsultasActionPerformed
 
@@ -198,6 +195,19 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonVolverMenu1ActionPerformed
 
+    private void boxTemasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTemasItemStateChanged
+        String tema= (String)(boxTemas.getSelectedItem());
+        mostrarIds(tema);
+    }//GEN-LAST:event_boxTemasItemStateChanged
+
+    private void boxTemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxTemasActionPerformed
+
+    }//GEN-LAST:event_boxTemasActionPerformed
+
+    private void boxIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxIDActionPerformed
+
+    }//GEN-LAST:event_boxIDActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -205,16 +215,13 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         String matriz[][] = new String[manejo.tamMapa()][6];
         HashMap<String, ArrayListConsultas> auxMapa = manejo.getConsultas();
         Consulta ConsultaFiltrada;
-        ConsultaFiltrada = manejo.motrarConsultasPorTema(fieldTema.getText()).getConsultaPorId(Integer.parseInt(fieldId.getText()));
-        for (int i = 0; i < 2; i++) {
-            matriz[i][0] = Integer.toString(ConsultaFiltrada.getIdConsulta());
-            matriz[i][1] = ConsultaFiltrada.getTituloTema();
-            matriz[i][2] = ConsultaFiltrada.getTituloConsulta();
-            matriz[i][3] = ConsultaFiltrada.getDescripcion();
-            matriz[i][4] = Integer.toString(ConsultaFiltrada.getRespuestasConsulta().getLikes());
-            matriz[i][5] = Integer.toString(ConsultaFiltrada.getRespuestasConsulta().getDisLikes());
-
-        }
+        ConsultaFiltrada = manejo.motrarConsultasPorTema((String) boxTemas.getSelectedItem()).getConsultaPorId((String)boxID.getSelectedItem());
+            matriz[0][0] = Integer.toString(ConsultaFiltrada.getIdConsulta());
+            matriz[0][1] = ConsultaFiltrada.getTituloTema();
+            matriz[0][2] = ConsultaFiltrada.getTituloConsulta();
+            matriz[0][3] = ConsultaFiltrada.getDescripcion();
+            matriz[0][4] = Integer.toString(ConsultaFiltrada.getRespuestasConsulta().getLikes());
+            matriz[0][5] = Integer.toString(ConsultaFiltrada.getRespuestasConsulta().getDisLikes());
 
         tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
                 matriz,
@@ -223,12 +230,29 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                 }
         ));
     }
+
+    public void mostrarTemas(){
+        HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
+        
+        for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
+            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+                boxTemas.addItem(set.getKey());
+        }
+    }
+    
+    public void mostrarIds(String tema){
+        ArrayListConsultas arrayListdeIDs= manejo.getConsultasPorTema(tema);
+        boxID.removeAllItems();
+        for (int i = 0; i < arrayListdeIDs.sizeConsultas(); i++) {
+            boxID.addItem(Integer.toString(arrayListdeIDs.getConsulta(i).getIdConsulta()));
+        }
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonMostrarConsultas;
     private javax.swing.JButton botonVolverMenu;
     private javax.swing.JButton botonVolverMenu1;
-    private javax.swing.JTextField fieldId;
-    private javax.swing.JTextField fieldTema;
+    private javax.swing.JComboBox boxID;
+    private javax.swing.JComboBox boxTemas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

@@ -14,9 +14,10 @@ public class VentanaErrorField extends javax.swing.JFrame {
     /**
      * Creates new form VentanaErrorField
      */
-    public VentanaErrorField() {
+    public VentanaErrorField(String aviso) {
         initComponents();
         this.setLocationRelativeTo(null);
+        this.jLabel1.setText(aviso);
     }
 
     /**
@@ -31,9 +32,7 @@ public class VentanaErrorField extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         botonOK = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setText("Ha ingresado mal un dato, intentelo nuevamente");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         botonOK.setText("OK");
         botonOK.addActionListener(new java.awt.event.ActionListener() {
@@ -47,21 +46,20 @@ public class VentanaErrorField extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(42, 42, 42)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(botonOK)))
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addGap(120, 120, 120)
+                .addComponent(botonOK)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(48, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(39, 39, 39)
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
+                .addContainerGap(55, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(40, 40, 40)
                 .addComponent(botonOK)
                 .addGap(20, 20, 20))
         );

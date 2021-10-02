@@ -30,6 +30,7 @@ public class VentanaConsultas extends javax.swing.JFrame {
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
     private JFrame editarConsulta;
+    private VentanaErrorField aviso;
     /**
      * Creates new form VentanaConsultas
      */
@@ -55,7 +56,7 @@ public class VentanaConsultas extends javax.swing.JFrame {
         botonVolverAlMenu = new javax.swing.JButton();
         botonGenerarExel = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -78,7 +79,7 @@ public class VentanaConsultas extends javax.swing.JFrame {
             }
         });
 
-        botonGenerarExel.setText("General Exel");
+        botonGenerarExel.setText("Generar Excel");
         botonGenerarExel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonGenerarExelActionPerformed(evt);
@@ -139,7 +140,8 @@ public class VentanaConsultas extends javax.swing.JFrame {
             wb.write(out);
             wb.close();
             out.close();
-            System.out.println("Archivo creado");
+            this.aviso = new VentanaErrorField("Excel realizado con exito!");
+            this.aviso.setVisible(true);
             return;
         }catch(FileNotFoundException e){
                     System.out.println(e);

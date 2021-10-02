@@ -51,7 +51,7 @@ public class VentanaAnadir extends javax.swing.JFrame {
 
         jButton1.setText("jButton1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         fieldDeTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,16 +178,16 @@ public class VentanaAnadir extends javax.swing.JFrame {
     }//GEN-LAST:event_fieldTituloConsultaActionPerformed
 
     private void botonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOKActionPerformed
+        if(manejo.existeIdEnConsultas(fieldDeTema.getText(), Integer.parseInt(fieldDeIdConsulta.getText()))){
+            this.error= new VentanaErrorField("Ya existe esta id, Ingrese otra");
+            this.error.setVisible(true);
+            return;
+        }
         Consulta nuevaConsulta= new Consulta();
-     
         nuevaConsulta.setTituloTema(fieldDeTema.getText());
         nuevaConsulta.setDescripcion(fieldDescripcionConsulta.getText());
         nuevaConsulta.setIdConsulta(Integer.parseInt(fieldDeIdConsulta.getText()));
         nuevaConsulta.setTituloConsulta(fieldTituloConsulta.getText());
-        if(manejo.existeIdEnConsultas(fieldDeTema.getText(), Integer.parseInt(fieldDeIdConsulta.getText()))){
-            this.error= new VentanaErrorField();
-            this.error.setVisible(true);
-        }
         manejo.agregarConsulta(nuevaConsulta);
         this.setVisible(false);
         this.menuPrincipal.setVisible(true);

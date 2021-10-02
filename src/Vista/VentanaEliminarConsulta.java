@@ -18,6 +18,7 @@ import javax.swing.JFrame;
 public class VentanaEliminarConsulta extends javax.swing.JFrame {
     private ManejoDeColecciones manejo;
     private JFrame menu;
+
     /**
      * Creates new form VentanaEliminarConsulta
      */
@@ -49,13 +50,13 @@ public class VentanaEliminarConsulta extends javax.swing.JFrame {
         boxTemas = new javax.swing.JComboBox();
         boxID = new javax.swing.JComboBox();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setText("Ingrese el tema donde se encuentra la consulta");
 
         jLabel2.setText("Ingrese la ID de la consulta a eliminar");
 
-        botonAtras.setText("Atras");
+        botonAtras.setText("Volver al menu");
         botonAtras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonAtrasActionPerformed(evt);
@@ -127,7 +128,7 @@ public class VentanaEliminarConsulta extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonAtras)
                     .addComponent(botonEliminar))
-                .addContainerGap(13, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -142,16 +143,8 @@ public class VentanaEliminarConsulta extends javax.swing.JFrame {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String temaBuscado = (String)boxTemas.getSelectedItem();
         int idConsulta = Integer.parseInt((String)boxID.getSelectedItem());
-        if(!manejo.existeEnMapaConsulta(temaBuscado)){
-            System.out.println("Tema no existe");
-            return;
-        }
-        if(!manejo.existeIdEnConsultas(temaBuscado, idConsulta)){
-            System.out.println("Id no existe");
-            return;
-        }
         manejo.getArray(temaBuscado).removeConsulta(manejo.buscarConsulta(temaBuscado,idConsulta));
-        this.setVisible(false);
+        this.setVisible(false);     
     }//GEN-LAST:event_botonEliminarActionPerformed
 
     private void boxTemasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTemasItemStateChanged
@@ -171,7 +164,8 @@ public class VentanaEliminarConsulta extends javax.swing.JFrame {
         HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
         
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            boxTemas.addItem(set.getKey());
+            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+                boxTemas.addItem(set.getKey());
         
         }
     }

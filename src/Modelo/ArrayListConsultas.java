@@ -43,4 +43,20 @@ public class ArrayListConsultas {
         }
         return null;
     }
+    
+    public Consulta getConsultaPorId(String idBuscada){
+        int id = Integer.parseInt(idBuscada);
+        for (int i = 0; i < consultas.size() ; i++) {
+            if(consultas.get(i).getIdConsulta()==id){
+                return consultas.get(i);
+            }
+        }
+        return null;
+    }
+    
+    public void editarTemaConsultas(String tema){
+        for(int i = 0 ; i < consultas.size() ; i++){
+            consultas.get(i).setTituloTema(tema);
+        }
+    }
 }

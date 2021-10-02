@@ -127,8 +127,7 @@ public class ManejoDeColecciones {
         }
         return null;
     }
-    
-    
+   
     public void editarConsulta (String temaBuscado, int idConsultaBuscada, String tituloNuevo, String descripcionNueva){
         if(!tituloNuevo.equals(null)){
             consultas.get(temaBuscado).getConsultaPorId(idConsultaBuscada).setTituloConsulta(tituloNuevo);
@@ -156,5 +155,23 @@ public class ManejoDeColecciones {
                 }
             }
         }
+    }
+    
+    public void EliminarTema(String tema){
+        consultas.remove(tema);
+    }
+    
+    public void EditarTema(String temaAEditar , String temaEditado){
+        ArrayListConsultas auxConsultas = consultas.get(temaAEditar);
+        auxConsultas.editarTemaConsultas(temaEditado);
+        consultas.remove(temaAEditar);
+        for(int i = 0 ; i < auxConsultas.sizeConsultas() ; i++){
+            agregarConsulta(auxConsultas.getConsulta(i));
+        }
+    }
+    
+    public void AgregarTema(String nuevoTema){
+        ArrayListConsultas auxConsultas = new ArrayListConsultas();
+        consultas.put(nuevoTema, auxConsultas);
     }
 }

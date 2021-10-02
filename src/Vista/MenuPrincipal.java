@@ -22,6 +22,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private VentanaMostrarIdYTema mostrarIdFiltro;
     private VentanaMostrarGrafico mostrarGrafico;
     private VentanaAgregarRespuesta anadirRespuesta;
+    private VentanaEliminarTema eliminarTema;
+    private VentanaEditarTema editarTema;
+    private VentanaAgregarTema agregarTema;
     /**
      * Creates new form MenuPrincipal
      */
@@ -53,13 +56,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
         botonVerConsultaPorTema = new javax.swing.JButton();
         botonConsultaTemaEID = new javax.swing.JButton();
         botonMostrarGrafico = new javax.swing.JButton();
+        botonEliminarTema = new javax.swing.JButton();
+        botonEditarTema = new javax.swing.JButton();
+        botonAgregarTema = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 1, 24)); // NOI18N
         jLabel1.setText("Bienvenidos al sistema de Consulta Ciudadanas");
 
-        jLabel2.setText("Que desea hacer?");
+        jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel2.setText("Eliga una opcion");
 
         botonVerConsultas.setText("Ver Consultas");
         botonVerConsultas.addActionListener(new java.awt.event.ActionListener() {
@@ -131,69 +139,97 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        botonEliminarTema.setText("Eliminar Tema");
+        botonEliminarTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEliminarTemaActionPerformed(evt);
+            }
+        });
+
+        botonEditarTema.setText("Editar Tema");
+        botonEditarTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonEditarTemaActionPerformed(evt);
+            }
+        });
+
+        botonAgregarTema.setText("Agregar tema");
+        botonAgregarTema.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonAgregarTemaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(48, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(39, 39, 39))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(botonMostrarGrafico)
-                            .addComponent(jLabel2))
-                        .addGap(273, 273, 273))))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(76, 76, 76)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonConsultaTemaEID)
-                            .addComponent(botonVerConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonAgregarRespuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botonEditarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 165, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(140, 140, 140)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(botonVerConsultaPorTema, javax.swing.GroupLayout.DEFAULT_SIZE, 154, Short.MAX_VALUE)
-                            .addComponent(botonVerTemas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonAgregarConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(botonEliminarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(29, 29, 29)
+                        .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(293, 293, 293)
-                        .addComponent(botonSalir)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(260, 260, 260)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(23, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(botonAgregarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botonEditarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(botonEditarTema, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonEliminarTema, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonMostrarGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonEliminarConsulta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonAgregarConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonAgregarRespuesta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonVerConsultaPorTema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonVerTemas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonVerConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botonConsultaTemaEID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGap(195, 195, 195))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(44, 44, 44)
+                .addGap(20, 20, 20)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonVerTemas)
-                    .addComponent(botonVerConsultas))
-                .addGap(22, 22, 22)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonVerConsultaPorTema)
-                    .addComponent(botonConsultaTemaEID))
-                .addGap(47, 47, 47)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonAgregarConsultas)
-                    .addComponent(botonAgregarRespuesta))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonEditarConsulta)
-                    .addComponent(botonEliminarConsulta))
-                .addGap(18, 18, 18)
+                .addComponent(botonVerConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(botonVerTemas)
+                .addGap(20, 20, 20)
+                .addComponent(botonConsultaTemaEID)
+                .addGap(20, 20, 20)
+                .addComponent(botonVerConsultaPorTema)
+                .addGap(20, 20, 20)
+                .addComponent(botonAgregarTema)
+                .addGap(20, 20, 20)
+                .addComponent(botonAgregarRespuesta)
+                .addGap(20, 20, 20)
+                .addComponent(botonAgregarConsultas)
+                .addGap(20, 20, 20)
+                .addComponent(botonEliminarConsulta)
+                .addGap(20, 20, 20)
+                .addComponent(botonEliminarTema)
+                .addGap(20, 20, 20)
+                .addComponent(botonEditarTema)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(botonEditarConsulta)
+                .addGap(20, 20, 20)
                 .addComponent(botonMostrarGrafico)
-                .addGap(35, 35, 35)
+                .addGap(20, 20, 20)
                 .addComponent(botonSalir)
-                .addGap(40, 40, 40))
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -240,6 +276,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void botonSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonSalirActionPerformed
         dispose();
+        System.exit(0);
         
     }//GEN-LAST:event_botonSalirActionPerformed
 
@@ -247,12 +284,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
         this.mostrarFiltro= new VentanaMostrarConFiltro(this,manejo);
         this.mostrarFiltro.setVisible(true);
+        this.mostrarFiltro.mostrarTemas();
     }//GEN-LAST:event_botonVerConsultaPorTemaActionPerformed
 
     private void botonConsultaTemaEIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaTemaEIDActionPerformed
         this.setVisible(false);
         this.mostrarIdFiltro= new VentanaMostrarIdYTema(this, manejo);
         mostrarIdFiltro.setVisible(true);
+        mostrarIdFiltro.mostrarTemas();
     }//GEN-LAST:event_botonConsultaTemaEIDActionPerformed
 
     private void botonMostrarGraficoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarGraficoActionPerformed
@@ -262,6 +301,24 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mostrarGrafico.mostrarTemas();
     }//GEN-LAST:event_botonMostrarGraficoActionPerformed
 
+    private void botonEliminarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarTemaActionPerformed
+        this.setVisible(false);
+        this.eliminarTema = new VentanaEliminarTema(this.manejo , this);
+        this.eliminarTema.setVisible(true);
+        this.eliminarTema.mostrarTemas();
+    }//GEN-LAST:event_botonEliminarTemaActionPerformed
+
+    private void botonEditarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarTemaActionPerformed
+        this.editarTema = new VentanaEditarTema(this.manejo , this);
+        this.editarTema.setVisible(true);
+        this.editarTema.mostrarTemas();
+    }//GEN-LAST:event_botonEditarTemaActionPerformed
+
+    private void botonAgregarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarTemaActionPerformed
+        this.agregarTema = new VentanaAgregarTema(this.manejo , this);
+        this.agregarTema.setVisible(true);
+    }//GEN-LAST:event_botonAgregarTemaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -270,9 +327,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarConsultas;
     private javax.swing.JButton botonAgregarRespuesta;
+    private javax.swing.JButton botonAgregarTema;
     private javax.swing.JButton botonConsultaTemaEID;
     private javax.swing.JButton botonEditarConsulta;
+    private javax.swing.JButton botonEditarTema;
     private javax.swing.JButton botonEliminarConsulta;
+    private javax.swing.JButton botonEliminarTema;
     private javax.swing.JButton botonMostrarGrafico;
     private javax.swing.JButton botonSalir;
     private javax.swing.JButton botonVerConsultaPorTema;

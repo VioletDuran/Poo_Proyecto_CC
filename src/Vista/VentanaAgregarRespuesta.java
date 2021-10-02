@@ -48,7 +48,7 @@ public class VentanaAgregarRespuesta extends javax.swing.JFrame {
         botonDislike = new javax.swing.JRadioButton();
         botonLike = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Agregar Respuesta:");
@@ -74,7 +74,7 @@ public class VentanaAgregarRespuesta extends javax.swing.JFrame {
             }
         });
 
-        botonMenuPrincipal.setText("Volver Menu");
+        botonMenuPrincipal.setText("Volver a menu");
         botonMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonMenuPrincipalActionPerformed(evt);
@@ -131,7 +131,7 @@ public class VentanaAgregarRespuesta extends javax.swing.JFrame {
                             .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel2)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(11, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,8 +205,8 @@ public class VentanaAgregarRespuesta extends javax.swing.JFrame {
         HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
         
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            boxTemas.addItem(set.getKey());
-        
+            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+                boxTemas.addItem(set.getKey());
         }
     }
     

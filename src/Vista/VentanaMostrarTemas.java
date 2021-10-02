@@ -42,7 +42,7 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
         tablaTemas = new javax.swing.JTable();
         botonVolverMenu = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Trebuchet MS", 0, 24)); // NOI18N
         jLabel1.setText("Lista de todos los temas:");
@@ -60,7 +60,7 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
         ));
         jScrollPane2.setViewportView(tablaTemas);
 
-        botonVolverMenu.setText("Volver menu principal");
+        botonVolverMenu.setText("Volver al menu");
         botonVolverMenu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonVolverMenuActionPerformed(evt);
