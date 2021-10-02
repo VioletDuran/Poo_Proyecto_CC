@@ -3,8 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package consultaciudadana;
-import java.io.*;
+package consultaciudadana.Modelo;
 import java.util.ArrayList;
 /**
  *
@@ -21,6 +20,7 @@ import java.util.ArrayList;
 public class Consulta {
     //Atributos
     private String idConsulta;
+    //No tiene que estar
     private ArrayList<Respuesta> respuestas;
     private String titulo;
     private String descripcion;
@@ -98,10 +98,11 @@ public class Consulta {
      * Objeto tipo Respuesta para rellenar.
      */
     
+    //Funciones que no tienen que estar 
     public void addRespuesta(Respuesta respuesta){
         this.respuestas.add(respuesta);
     }
-    
+    // SOBRECARGRA RARA
     public void addRespuesta(String idRespuesta, int meGustas, int noMeGustas){
         Respuesta aux= new Respuesta();
         aux.setIdRespuesta(idRespuesta);
@@ -118,28 +119,6 @@ public class Consulta {
      * @param acceso 
      * Archivo CSV abierto.
      */
-    public void llenarRespuestas(String linea, CSV acceso){    
-        
-        
-            Respuesta auxRespuesta = new Respuesta();
-            for (int i = 6; i < 9; i++) {
-                switch(i){
-                    case 6:{
-                        auxRespuesta.setIdRespuesta(acceso.get_csvField(linea, i));
-                        break;
-                    }
-                    case 7:{
-                        auxRespuesta.setMeGustas(Integer.parseInt(acceso.get_csvField(linea,i)));
-                        break;
-                    }
-                    case 8:{
-                        auxRespuesta.setNoMeGustas(Integer.parseInt(acceso.get_csvField(linea,i)));
-                        break;
-                    }
-                }
-        }
-        this.respuestas.add(auxRespuesta);
-    }
     /**
      * Metodo realizado para mostrar el ArrayList de respuestas, mostrando su ID, Cantidad de me gustas y cantidad
      * de no me gustas.

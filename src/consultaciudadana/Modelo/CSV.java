@@ -1,4 +1,4 @@
-package consultaciudadana;
+package consultaciudadana.Modelo;
 
 import java.util.*;
 import java.io.*;
