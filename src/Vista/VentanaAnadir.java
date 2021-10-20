@@ -6,7 +6,7 @@
 package Vista;
 
 import Controlador.*;
-import Modelo.Consulta;
+import Modelo.*;
 import javax.swing.JFrame;
 
 /**
@@ -53,6 +53,7 @@ public class VentanaAnadir extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
+        fieldDeTema.setEditable(false);
         fieldDeTema.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 fieldDeTemaActionPerformed(evt);
@@ -183,7 +184,7 @@ public class VentanaAnadir extends javax.swing.JFrame {
             this.error.setVisible(true);
             return;
         }
-        Consulta nuevaConsulta= new Consulta();
+        ConsultaBinaria nuevaConsulta= new ConsultaBinaria();
         nuevaConsulta.setTituloTema(fieldDeTema.getText());
         nuevaConsulta.setDescripcion(fieldDescripcionConsulta.getText());
         nuevaConsulta.setIdConsulta(Integer.parseInt(fieldDeIdConsulta.getText()));

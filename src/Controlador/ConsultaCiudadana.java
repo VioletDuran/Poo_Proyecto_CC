@@ -16,7 +16,8 @@ public class ConsultaCiudadana {
     
     public static void main(String [] args) throws IOException{
         ManejoDeColecciones manejo = new ManejoDeColecciones();
-        manejo.generarConsultas();
+        manejo.generarConsultasBinarias();
+        manejo.generarConsultasMultiples();
         MenuPrincipal llamadoMenu = new MenuPrincipal(manejo);
         llamadoMenu.setVisible(true);
     }

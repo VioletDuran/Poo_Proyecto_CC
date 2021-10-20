@@ -109,16 +109,8 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void mostrarTemas(){
-        String matriz[][] = new String [manejo.tamMapa()][6];
-        HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
-        int i=0;
-        for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            matriz[i][0]= set.getKey(); // TEMA
-            i++;
-            
-        }
         tablaTemas.setModel(new javax.swing.table.DefaultTableModel(
-            matriz,
+            manejo.matrizTemas(),
             new String [] {
                 "Temas"
             }

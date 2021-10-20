@@ -39,31 +39,23 @@
           </Group>
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <Component id="botonAgregarTema" min="-2" pref="193" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                  </Group>
-                  <Group type="102" alignment="1" attributes="0">
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="botonEditarConsulta" min="-2" pref="193" max="-2" attributes="0"/>
-                          <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="botonEditarTema" alignment="0" max="32767" attributes="0"/>
-                              <Component id="botonEliminarTema" alignment="0" max="32767" attributes="0"/>
-                              <Component id="botonSalir" max="32767" attributes="0"/>
-                              <Component id="botonMostrarGrafico" max="32767" attributes="0"/>
-                              <Component id="botonEliminarConsulta" max="32767" attributes="0"/>
-                              <Component id="botonAgregarConsultas" max="32767" attributes="0"/>
-                              <Component id="botonAgregarRespuesta" max="32767" attributes="0"/>
-                              <Component id="botonVerConsultaPorTema" max="32767" attributes="0"/>
-                              <Component id="botonVerTemas" max="32767" attributes="0"/>
-                              <Component id="botonVerConsultas" max="32767" attributes="0"/>
-                              <Component id="botonConsultaTemaEID" alignment="1" max="32767" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
-                  </Group>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="botonAgregarTema" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonEditarTema" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonEditarConsulta" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonEliminarTema" alignment="0" max="32767" attributes="0"/>
+                  <Component id="botonSalir" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonMostrarGrafico" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonEliminarConsulta" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonAgregarConsultas" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonAgregarRespuesta" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonVerConsultaPorTema" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonVerTemas" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonVerConsultas" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonConsultaTemaEID" alignment="1" max="32767" attributes="0"/>
+                  <Component id="botonRespuestaMultiple" alignment="1" max="32767" attributes="0"/>
               </Group>
+              <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -87,6 +79,8 @@
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="botonAgregarRespuesta" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <Component id="botonRespuestaMultiple" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="botonAgregarConsultas" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="botonEliminarConsulta" min="-2" max="-2" attributes="0"/>
@@ -100,7 +94,7 @@
               <Component id="botonMostrarGrafico" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
               <Component id="botonSalir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -148,7 +142,7 @@
     </Component>
     <Component class="javax.swing.JButton" name="botonAgregarRespuesta">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Agregar Respuesta"/>
+        <Property name="text" type="java.lang.String" value="Agregar Respuesta Simple"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAgregarRespuestaActionPerformed"/>
@@ -224,6 +218,14 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonAgregarTemaActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="botonRespuestaMultiple">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Agregar Respuesta Multiple"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRespuestaMultipleActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

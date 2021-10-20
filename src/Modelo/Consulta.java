@@ -9,16 +9,15 @@ package Modelo;
  *
  * @author Sergio
  */
-public class Consulta {
+public abstract class Consulta {
     
     private int idConsulta;
     private String tituloConsulta;
     private String Descripcion;
-    private Respuesta respuestasConsulta;
     private String tituloTema;
-    
+   
     public Consulta() {
-        respuestasConsulta = new Respuesta();
+ 
     }
     
     public int getIdConsulta() {
@@ -45,14 +44,12 @@ public class Consulta {
         this.Descripcion = Descripcion;
     }
 
-    public Respuesta getRespuestasConsulta() {
-        return respuestasConsulta;
-    }
+    public abstract Object getRespuestasConsulta();
+    
 
-    public void setRespuestasConsulta(Respuesta respuestasConsulta) {
-        this.respuestasConsulta = respuestasConsulta;
-    }
+    public abstract void setRespuestasConsulta(Object respuesta);
 
+    
     public String getTituloTema() {
         return tituloTema;
     }

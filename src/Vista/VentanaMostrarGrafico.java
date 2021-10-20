@@ -7,7 +7,7 @@ package Vista;
 
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
-import Modelo.Consulta;
+import Modelo.*;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
@@ -210,20 +210,21 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
         String descripcion,titulo;
         HashMap<String,ArrayListConsultas> aux = manejo.getConsultas();
         ArrayListConsultas auxConsultas = aux.get(tema);
-        Consulta auxConsulta = new Consulta();
+        ConsultaBinaria auxConsulta = new ConsultaBinaria();
         for(int i = 0; i < auxConsultas.sizeConsultas(); i++){
             if(auxConsultas.getConsulta(i).getIdConsulta() == idConsulta){
-                auxConsulta = auxConsultas.getConsulta(i);
+                System.out.println("IwI");
+                //auxConsulta = auxConsultas.getConsulta(i);
             }
         }
         nombreTemaConsulta.setText(auxConsulta.getTituloConsulta());
         nombreConsulta.setText(auxConsulta.getDescripcion());
-        cantidadLikes = auxConsulta.getRespuestasConsulta().getLikes();
-        cantidadDislikes = auxConsulta.getRespuestasConsulta().getDisLikes();
+        //cantidadLikes = auxConsulta.getRespuestasConsulta().getLikes();
+        //cantidadDislikes = auxConsulta.getRespuestasConsulta().getDisLikes();
         
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        datos.setValue(cantidadLikes, "Likes", "");
-        datos.setValue(cantidadDislikes, "Dislikes", "");
+        //datos.setValue(cantidadLikes, "Likes", "");
+        //datos.setValue(cantidadDislikes, "Dislikes", "");
         JFreeChart graficoBarras = ChartFactory.createBarChart3D("Likes y Dislikes", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
         ChartPanel panel = new ChartPanel(graficoBarras);
         panel.setPreferredSize(new Dimension(400,300));

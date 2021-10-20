@@ -42,8 +42,6 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
     private void initComponents() {
 
         botonVolverMenu = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaConsulta = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -52,6 +50,8 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         boxTemas = new javax.swing.JComboBox();
         boxID = new javax.swing.JComboBox();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaConsulta = new javax.swing.JTable();
 
         botonVolverMenu.setText("Volver menu");
         botonVolverMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -61,17 +61,6 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null, null}
-            },
-            new String [] {
-                "ID", "Tema", "Titulo Consulta", "Descripcion", "Likes", "Dislikes"
-            }
-        ));
-        tablaConsulta.setRowHeight(30);
-        jScrollPane1.setViewportView(tablaConsulta);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setText("Ingrese filtros:");
@@ -113,22 +102,21 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
             }
         });
 
+        tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra", "Likes", "Dislikes"
+            }
+        ));
+        tablaConsulta.setRowHeight(30);
+        jScrollPane1.setViewportView(tablaConsulta);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(95, 95, 95)
-                .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(129, 129, 129))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addGap(152, 152, 152))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(369, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -136,17 +124,28 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                         .addComponent(jLabel1)
                         .addGap(371, 371, 371))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonVolverMenu1)
-                        .addGap(390, 390, 390))
+                        .addComponent(jLabel4)
+                        .addGap(361, 361, 361))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(botonMostrarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(361, 361, 361))))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(10, 10, 10)
+                                .addComponent(botonVolverMenu1)))
+                        .addGap(390, 390, 390))))
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                .addGap(130, 130, 130)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3)
+                .addGap(152, 152, 152))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(112, 112, 112)
+                .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -155,24 +154,21 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel2))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)))
+                .addGap(36, 36, 36)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(19, 19, 19)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
                 .addComponent(botonMostrarConsultas)
-                .addGap(24, 24, 24)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonVolverMenu1)
-                .addContainerGap())
+                .addGap(7, 7, 7))
         );
 
         pack();
@@ -212,27 +208,16 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public void mostrarConsultaTemaID() {
-        String matriz[][] = new String[manejo.tamMapa()][6];
-        HashMap<String, ArrayListConsultas> auxMapa = manejo.getConsultas();
-        Consulta ConsultaFiltrada;
-        ConsultaFiltrada = manejo.motrarConsultasPorTema((String) boxTemas.getSelectedItem()).getConsultaPorId((String)boxID.getSelectedItem());
-            matriz[0][0] = Integer.toString(ConsultaFiltrada.getIdConsulta());
-            matriz[0][1] = ConsultaFiltrada.getTituloTema();
-            matriz[0][2] = ConsultaFiltrada.getTituloConsulta();
-            matriz[0][3] = ConsultaFiltrada.getDescripcion();
-            matriz[0][4] = Integer.toString(ConsultaFiltrada.getRespuestasConsulta().getLikes());
-            matriz[0][5] = Integer.toString(ConsultaFiltrada.getRespuestasConsulta().getDisLikes());
-
         tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
-                matriz,
+                manejo.matrizTemasEId((String) boxTemas.getSelectedItem(), (String)boxID.getSelectedItem()),
                 new String[]{
-                    "ID", "Tema", "Titulo Consulta", "Descripcion", "Likes", "Dislikes"
+                    "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra", "Likes", "Dislikes"
                 }
         ));
     }
 
     public void mostrarTemas(){
-        HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
+        HashMap<String,ArrayListConsultas> auxMapa = manejo.getConsultas();
         
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
             if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
