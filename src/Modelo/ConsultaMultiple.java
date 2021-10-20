@@ -45,4 +45,5 @@ public class ConsultaMultiple extends Consulta {
                 break;
         }
     }
+
 }

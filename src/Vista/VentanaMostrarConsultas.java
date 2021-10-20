@@ -12,11 +12,13 @@ import javax.swing.*;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.*;
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author sebas
  */
-public class VentanaMostrarConsultas extends javax.swing.JFrame {
+public class VentanaMostrarConsultas extends javax.swing.JFrame implements Reportable {
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
     private JFrame editarConsulta;
@@ -45,6 +47,7 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
         tablaConsulta = new javax.swing.JTable();
         botonVolverAlMenu = new javax.swing.JButton();
         botonGenerarExel = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -79,6 +82,13 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
             }
         });
 
+        jButton1.setText("Generar txt");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -86,6 +96,8 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(botonVolverAlMenu)
+                .addGap(294, 294, 294)
+                .addComponent(jButton1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonGenerarExel)
                 .addGap(91, 91, 91))
@@ -100,20 +112,42 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonVolverAlMenu)
-                    .addComponent(botonGenerarExel))
+                    .addComponent(botonGenerarExel)
+                    .addComponent(jButton1))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void botonVolverAlMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverAlMenuActionPerformed
-        this.setVisible(false);
-        this.menuPrincipal.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_botonVolverAlMenuActionPerformed
-
-    private void botonGenerarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarExelActionPerformed
+    @Override
+    public void generarTxt(){
+        String filePath = ("./consultasTxt.txt");
+        File file = new File(filePath);
+        try{
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < tablaConsulta.getRowCount(); i++) {
+                for (int j = 0; j < tablaConsulta.getColumnCount(); j++) {
+                    if (tablaConsulta.getValueAt(i, j) != null) {
+                        bw.write(tablaConsulta.getValueAt(i,j).toString()+", ");
+                    }
+                }
+                bw.write("\n");
+            }
+            bw.close();
+            fw.close();
+            this.aviso = new VentanaErrorField("Txt realizado con exito!");
+            this.aviso.setVisible(true);
+            return;
+        } catch(IOException ex){
+            System.out.println(ex);
+        }
+        
+    }
+    
+    @Override
+    public void generarExcel() {
         try{
             Workbook wb = new XSSFWorkbook();
             Sheet sheet = wb.createSheet("Data");
@@ -131,7 +165,7 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
                     }
                 }
             }
-            FileOutputStream out = new FileOutputStream(new File("Datos.xlsx"));
+            FileOutputStream out = new FileOutputStream(new File("consultasXlsx.xlsx"));
             wb.write(out);
             wb.close();
             out.close();
@@ -143,7 +177,21 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
         }catch(IOException io){
                     System.out.println(io);
         }
+    }
+    
+    private void botonVolverAlMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonVolverAlMenuActionPerformed
+        this.setVisible(false);
+        this.menuPrincipal.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_botonVolverAlMenuActionPerformed
+
+    private void botonGenerarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarExelActionPerformed
+        generarExcel();
     }//GEN-LAST:event_botonGenerarExelActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        generarTxt();
+    }//GEN-LAST:event_jButton1ActionPerformed
  
     public void mostrarCosultas(){
         tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
@@ -156,6 +204,7 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonGenerarExel;
     private javax.swing.JButton botonVolverAlMenu;
+    private javax.swing.JButton jButton1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tablaConsulta;
     // End of variables declaration//GEN-END:variables

@@ -5,6 +5,7 @@
  */
 package Vista;
 
+
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
 import Modelo.*;
@@ -26,7 +27,6 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
     
         private ManejoDeColecciones manejo;
         private JFrame menuPrincipal;
-
     /**
      * Creates new form VentanaMostrarGrafico
      */
@@ -84,7 +84,7 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
         );
         panelGraficoLayout.setVerticalGroup(
             panelGraficoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 369, Short.MAX_VALUE)
+            .addGap(0, 356, Short.MAX_VALUE)
         );
 
         nombreConsultaB.setText("Nombre:");
@@ -139,7 +139,7 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
                                         .addComponent(descripcionConsulta)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(nombreConsulta)))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
                                 .addComponent(volverMenuPrincipal))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(220, 220, 220)
@@ -148,17 +148,18 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
                         .addGap(201, 201, 201)
                         .addComponent(graficarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(26, 26, 26))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textoIngresoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(boxTemas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 189, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textoIngresoB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(boxID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(61, 61, 61))
             .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
@@ -177,9 +178,9 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
                     .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(22, 22, 22)
                 .addComponent(graficarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(58, 58, 58)
                 .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(171, 171, 171)
+                .addGap(167, 167, 167)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
@@ -204,36 +205,61 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
 
     private void graficarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarConsultaActionPerformed
         // TODO add your handling code here:
-        int cantidadLikes,cantidadDislikes;
+        panelGrafico.removeAll();
         String tema = (String)boxTemas.getSelectedItem();
         int idConsulta = Integer.parseInt((String)boxID.getSelectedItem());
-        String descripcion,titulo;
         HashMap<String,ArrayListConsultas> aux = manejo.getConsultas();
         ArrayListConsultas auxConsultas = aux.get(tema);
-        ConsultaBinaria auxConsulta = new ConsultaBinaria();
         for(int i = 0; i < auxConsultas.sizeConsultas(); i++){
             if(auxConsultas.getConsulta(i).getIdConsulta() == idConsulta){
-                System.out.println("IwI");
-                //auxConsulta = auxConsultas.getConsulta(i);
+                if(auxConsultas.getConsulta(i) instanceof ConsultaBinaria){
+                    MostrarGraficoBinario((ConsultaBinaria)auxConsultas.getConsulta(i));
+                }
+                if(auxConsultas.getConsulta(i) instanceof ConsultaMultiple){
+                   MostrarGraficoMultiple((ConsultaMultiple)auxConsultas.getConsulta(i));
+                }
             }
         }
+    }//GEN-LAST:event_graficarConsultaActionPerformed
+
+    public void MostrarGraficoMultiple(ConsultaMultiple auxConsulta){
+        RespuestaMultiple aux = new RespuestaMultiple();
         nombreTemaConsulta.setText(auxConsulta.getTituloConsulta());
         nombreConsulta.setText(auxConsulta.getDescripcion());
-        //cantidadLikes = auxConsulta.getRespuestasConsulta().getLikes();
-        //cantidadDislikes = auxConsulta.getRespuestasConsulta().getDisLikes();
-        
+        aux = (RespuestaMultiple)auxConsulta.getRespuestasConsulta();
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
-        //datos.setValue(cantidadLikes, "Likes", "");
-        //datos.setValue(cantidadDislikes, "Dislikes", "");
-        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Likes y Dislikes", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
+        datos.setValue(aux.getmFavor(), "Muy a Favor", "");
+        datos.setValue(aux.getaFavor(), "Favor", "");
+        datos.setValue(aux.getNeutro(), "Neutro","");
+        datos.setValue(aux.getContra(), "Contra","");
+        datos.setValue(aux.getmContra(), "Muy En Contra","");
+        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica Poblacional", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
         ChartPanel panel = new ChartPanel(graficoBarras);
         panel.setPreferredSize(new Dimension(400,300));
         panelGrafico.setLayout(new BorderLayout());
         panelGrafico.add(panel,BorderLayout.NORTH);
         pack();
         repaint();
-    }//GEN-LAST:event_graficarConsultaActionPerformed
-
+    }
+    
+    public void MostrarGraficoBinario(ConsultaBinaria auxConsulta){
+        RespuestaBinaria aux = new RespuestaBinaria();
+        String descripcion,titulo;
+        nombreTemaConsulta.setText(auxConsulta.getTituloConsulta());
+        nombreConsulta.setText(auxConsulta.getDescripcion());
+        aux = (RespuestaBinaria)auxConsulta.getRespuestasConsulta();
+        DefaultCategoryDataset datos = new DefaultCategoryDataset();
+        datos.setValue(aux.getLikes(), "Likes", "");
+        datos.setValue(aux.getDisLikes(), "Dislikes", "");
+        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica Poblacional", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
+        ChartPanel panel = new ChartPanel(graficoBarras);
+        panel.setPreferredSize(new Dimension(400,300));
+        panelGrafico.setLayout(new BorderLayout());
+        panelGrafico.add(panel,BorderLayout.NORTH);
+        pack();
+        repaint();
+    }
+    
     private void volverMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverMenuPrincipalActionPerformed
         // TODO add your handling code here:0
         this.setVisible(false);

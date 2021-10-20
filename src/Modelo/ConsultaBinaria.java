@@ -29,6 +29,6 @@ public class ConsultaBinaria extends Consulta{
         else
             this.respuesta.setDisLikes();
     }
-    
+
     
 }

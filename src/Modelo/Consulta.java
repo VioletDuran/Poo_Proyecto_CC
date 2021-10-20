@@ -9,7 +9,7 @@ package Modelo;
  *
  * @author Sergio
  */
-public abstract class Consulta {
+public abstract class Consulta  {
     
     private int idConsulta;
     private String tituloConsulta;

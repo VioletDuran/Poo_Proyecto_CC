@@ -8,19 +8,32 @@ package Vista;
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
 import Modelo.Consulta;
+import Modelo.Reportable;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
  *
  * @author sebas
  */
-public class VentanaMostrarIdYTema extends javax.swing.JFrame {
+public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reportable {
 
     private JFrame menuPrincipal;
     private ManejoDeColecciones manejo;
     private VentanaErrorField error;
+    private VentanaErrorField aviso;
 
     /**
      * Creates new form VentanaMostrarIdYTema
@@ -32,6 +45,64 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
     }
 
+    @Override
+    public void generarTxt(){
+        String filePath = ("./consultaFiltrada.txt");
+        File file = new File(filePath);
+        try{
+            FileWriter fw = new FileWriter(file);
+            BufferedWriter bw = new BufferedWriter(fw);
+            for (int i = 0; i < tablaConsulta.getRowCount(); i++) {
+                for (int j = 0; j < tablaConsulta.getColumnCount(); j++) {
+                    if (tablaConsulta.getValueAt(i, j) != null) {
+                        bw.write(tablaConsulta.getValueAt(i,j).toString()+", ");
+                    }
+                }
+                bw.write("\n");
+            }
+            bw.close();
+            fw.close();
+            this.aviso = new VentanaErrorField("Txt consulta filtrada realizado con exito!");
+            this.aviso.setVisible(true);
+            return;
+        } catch(IOException ex){
+            System.out.println(ex);
+        }
+        
+    }
+    
+    @Override
+    public void generarExcel() {
+        try{
+            Workbook wb = new XSSFWorkbook();
+            Sheet sheet = wb.createSheet("Data");
+            Row rowCol = sheet.createRow(0);
+            for (int i = 0; i < tablaConsulta.getColumnCount(); i++) {
+                Cell cell = rowCol.createCell(i);
+                cell.setCellValue(tablaConsulta.getColumnName(i));
+            }
+            for (int j = 0; j < tablaConsulta.getRowCount(); j++) {
+                Row row = sheet.createRow(j+1);
+                for (int k = 0; k < tablaConsulta.getColumnCount(); k++) {
+                    Cell cell = row.createCell(k);
+                    if (tablaConsulta.getValueAt(j, k) != null) {
+                        cell.setCellValue(tablaConsulta.getValueAt(j, k).toString());
+                    }
+                }
+            }
+            FileOutputStream out = new FileOutputStream(new File("consultaFiltrada.xlsx"));
+            wb.write(out);
+            wb.close();
+            out.close();
+            this.aviso = new VentanaErrorField("Excel realizado con exito!");
+            this.aviso.setVisible(true);
+            return;
+        }catch(FileNotFoundException e){
+                    System.out.println(e);
+        }catch(IOException io){
+                    System.out.println(io);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -52,6 +123,8 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         boxID = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaConsulta = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         botonVolverMenu.setText("Volver menu");
         botonVolverMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -113,26 +186,24 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
         tablaConsulta.setRowHeight(30);
         jScrollPane1.setViewportView(tablaConsulta);
 
+        jButton1.setText("Generar Excel");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        jButton2.setText("Generar txt");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(369, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(371, 371, 371))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(361, 361, 361))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(botonMostrarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addComponent(botonVolverMenu1)))
-                        .addGap(390, 390, 390))))
             .addGroup(layout.createSequentialGroup()
                 .addGap(130, 130, 130)
                 .addComponent(jLabel2)
@@ -146,6 +217,29 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(357, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonMostrarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(402, 402, 402))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(371, 371, 371))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(361, 361, 361))))
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(380, 380, 380)
+                        .addComponent(botonVolverMenu1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(318, 318, 318)
+                        .addComponent(jButton1)
+                        .addGap(32, 32, 32)
+                        .addComponent(jButton2)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -164,11 +258,15 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
                     .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addGap(26, 26, 26)
                 .addComponent(botonMostrarConsultas)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1)
+                    .addComponent(jButton2))
+                .addGap(18, 18, 18)
                 .addComponent(botonVolverMenu1)
-                .addGap(7, 7, 7))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -204,6 +302,14 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boxIDActionPerformed
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        generarExcel();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        generarTxt();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -238,6 +344,8 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame {
     private javax.swing.JButton botonVolverMenu1;
     private javax.swing.JComboBox boxID;
     private javax.swing.JComboBox boxTemas;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
