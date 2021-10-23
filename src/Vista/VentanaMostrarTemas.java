@@ -6,24 +6,24 @@
 package Vista;
 
 import Controlador.ManejoDeColecciones;
-import Modelo.ArrayListConsultas;
-import java.util.HashMap;
-import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author sebas
+ * VentanaMostrarTemas: Interfaz grafica la cual se ocupa los temas.
  */
 public class VentanaMostrarTemas extends javax.swing.JFrame {
+
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
+    private Reportable reporte;
+    private VentanaErrorField aviso;
+
     /**
      * Creates new form VentanaMostrarTemas
      */
-    public VentanaMostrarTemas(JFrame menuPrincipal , ManejoDeColecciones manejo) {
+    public VentanaMostrarTemas(JFrame menuPrincipal, ManejoDeColecciones manejo) {
         initComponents();
-        this.manejo= manejo;
+        this.manejo = manejo;
         this.menuPrincipal = menuPrincipal;
         this.setLocationRelativeTo(null);
     }
@@ -41,6 +41,8 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaTemas = new javax.swing.JTable();
         botonVolverMenu = new javax.swing.JButton();
+        botonGenerarTxt = new javax.swing.JButton();
+        botonGeneralExcel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -67,6 +69,20 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
             }
         });
 
+        botonGenerarTxt.setText("Generar txt");
+        botonGenerarTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGenerarTxtActionPerformed(evt);
+            }
+        });
+
+        botonGeneralExcel.setText("Generar Excel");
+        botonGeneralExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonGeneralExcelActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -80,8 +96,13 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
                         .addGap(24, 24, 24)
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 318, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(119, 119, 119)
-                        .addComponent(botonVolverMenu)))
+                        .addGap(128, 128, 128)
+                        .addComponent(botonVolverMenu))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addComponent(botonGenerarTxt)
+                        .addGap(65, 65, 65)
+                        .addComponent(botonGeneralExcel)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -90,10 +111,14 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
                 .addGap(36, 36, 36)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(botonGenerarTxt)
+                    .addComponent(botonGeneralExcel))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                 .addComponent(botonVolverMenu)
-                .addContainerGap())
+                .addGap(21, 21, 21))
         );
 
         pack();
@@ -105,19 +130,32 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonVolverMenuActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public void mostrarTemas(){
+    private void botonGenerarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarTxtActionPerformed
+        reporte = new ReporteTema(tablaTemas);
+        reporte.generarExcel();
+        this.aviso = new VentanaErrorField("Txt realizado con exito!");
+        this.aviso.setVisible(true);
+    }//GEN-LAST:event_botonGenerarTxtActionPerformed
+
+    private void botonGeneralExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGeneralExcelActionPerformed
+        reporte = new ReporteTema(tablaTemas);
+        reporte.generarTxt();
+        this.aviso = new VentanaErrorField("Excel realizado con exito!");
+        this.aviso.setVisible(true);
+    }//GEN-LAST:event_botonGeneralExcelActionPerformed
+
+    public void mostrarTemas() {
         tablaTemas.setModel(new javax.swing.table.DefaultTableModel(
-            manejo.matrizTemas(),
-            new String [] {
-                "Temas"
-            }
+                manejo.matrizTemas(),
+                new String[]{
+                    "Temas"
+                }
         ));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botonGeneralExcel;
+    private javax.swing.JButton botonGenerarTxt;
     private javax.swing.JButton botonVolverMenu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;

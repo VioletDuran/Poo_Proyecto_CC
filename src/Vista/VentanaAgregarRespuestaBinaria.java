@@ -12,16 +12,16 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author sebas
+ * VentanaAgregarRespuestaBinaria:
+ * Interfaz grafica la cual se ocupa para agregar una Respuesta Binaria.
  */
-public class VentanaAgregarRespuesta extends javax.swing.JFrame {
+public class VentanaAgregarRespuestaBinaria extends javax.swing.JFrame {
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
     /**
      * Creates new form VentanaAñadirRespuesta
      */
-    public VentanaAgregarRespuesta(ManejoDeColecciones manejo, JFrame menuPrincipal) {
+    public VentanaAgregarRespuestaBinaria(ManejoDeColecciones manejo, JFrame menuPrincipal) {
         initComponents();
         this.manejo=manejo;
         this.menuPrincipal= menuPrincipal;
@@ -198,9 +198,7 @@ public class VentanaAgregarRespuesta extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonOKActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+
     public void mostrarTemas(){
         HashMap<String,ArrayListConsultas> auxMapa = manejo.getConsultasBinarias();
         

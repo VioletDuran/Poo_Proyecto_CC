@@ -8,27 +8,30 @@ package Vista;
 import Controlador.*;
 
 /**
- *
- * @author sebas
+ * Clase MenuPrincipal:
+ * Interfaz grafica encargada de dar las multiples opciones al usuario.
  */
 public class MenuPrincipal extends javax.swing.JFrame {
+    /**
+     * Atributos:
+     * Las distintas ventanas a ocupar.
+     */
     private ManejoDeColecciones manejo;
     private VentanaMostrarConsultas mostrarConsultas;
-    private VentanaAnadir anadirConsulta;
+    private VentanaAgregarConsulta anadirConsulta;
     private VentanaMostrarTemas mostrarTemas;
     private VentanaEditarPregunta editarConsulta;
     private VentanaEliminarConsulta eliminarConsulta;
     private VentanaMostrarConFiltro mostrarFiltro;
     private VentanaMostrarIdYTema mostrarIdFiltro;
     private VentanaMostrarGrafico mostrarGrafico;
-    private VentanaAgregarRespuesta anadirRespuesta;
+    private VentanaAgregarRespuestaBinaria anadirRespuesta;
     private VentanaEliminarTema eliminarTema;
     private VentanaEditarTema editarTema;
     private VentanaAgregarTema agregarTema;
     private VentanaAgregarRespuestaMultiple agregarRespuestaM;
-    /**
-     * Creates new form MenuPrincipal
-     */
+    
+    
     public MenuPrincipal(ManejoDeColecciones manejo) {
         initComponents();
         this.manejo = new ManejoDeColecciones();
@@ -50,7 +53,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
         botonVerConsultas = new javax.swing.JButton();
         botonAgregarConsultas = new javax.swing.JButton();
         botonVerTemas = new javax.swing.JButton();
-        botonAgregarRespuesta = new javax.swing.JButton();
+        botonAgregarRespuestaBinaria = new javax.swing.JButton();
         botonEditarConsulta = new javax.swing.JButton();
         botonEliminarConsulta = new javax.swing.JButton();
         botonSalir = new javax.swing.JButton();
@@ -92,10 +95,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonAgregarRespuesta.setText("Agregar Respuesta Simple");
-        botonAgregarRespuesta.addActionListener(new java.awt.event.ActionListener() {
+        botonAgregarRespuestaBinaria.setText("Agregar Respuesta Simple");
+        botonAgregarRespuestaBinaria.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonAgregarRespuestaActionPerformed(evt);
+                botonAgregarRespuestaBinariaActionPerformed(evt);
             }
         });
 
@@ -193,7 +196,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addComponent(botonMostrarGrafico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonEliminarConsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonAgregarConsultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonAgregarRespuesta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botonAgregarRespuestaBinaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonVerConsultaPorTema, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonVerTemas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(botonVerConsultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -219,7 +222,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addComponent(botonAgregarTema)
                 .addGap(20, 20, 20)
-                .addComponent(botonAgregarRespuesta)
+                .addComponent(botonAgregarRespuestaBinaria)
                 .addGap(20, 20, 20)
                 .addComponent(botonRespuestaMultiple)
                 .addGap(20, 20, 20)
@@ -246,12 +249,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
        this.setVisible(false);
        this.mostrarConsultas = new VentanaMostrarConsultas(this, manejo);
        mostrarConsultas.setVisible(true);
-       mostrarConsultas.mostrarCosultas();
     }//GEN-LAST:event_botonVerConsultasActionPerformed
 
     private void botonAgregarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarConsultasActionPerformed
         this.setVisible(false);
-        this.anadirConsulta= new VentanaAnadir(manejo,this);
+        this.anadirConsulta= new VentanaAgregarConsulta(manejo,this);
         this.anadirConsulta.setVisible(true);
     }//GEN-LAST:event_botonAgregarConsultasActionPerformed
 
@@ -262,12 +264,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         mostrarTemas.mostrarTemas();
     }//GEN-LAST:event_botonVerTemasActionPerformed
 
-    private void botonAgregarRespuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarRespuestaActionPerformed
+    private void botonAgregarRespuestaBinariaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonAgregarRespuestaBinariaActionPerformed
         this.setVisible(false);
-        this.anadirRespuesta = new VentanaAgregarRespuesta(manejo,this);
+        this.anadirRespuesta = new VentanaAgregarRespuestaBinaria(manejo,this);
         this.anadirRespuesta.setVisible(true);
         anadirRespuesta.mostrarTemas();
-    }//GEN-LAST:event_botonAgregarRespuestaActionPerformed
+    }//GEN-LAST:event_botonAgregarRespuestaBinariaActionPerformed
 
     private void botonEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarConsultaActionPerformed
         editarConsulta = new VentanaEditarPregunta(manejo,this);
@@ -334,14 +336,11 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.agregarRespuestaM.mostrarVotos();
     }//GEN-LAST:event_botonRespuestaMultipleActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAgregarConsultas;
-    private javax.swing.JButton botonAgregarRespuesta;
+    private javax.swing.JButton botonAgregarRespuestaBinaria;
     private javax.swing.JButton botonAgregarTema;
     private javax.swing.JButton botonConsultaTemaEID;
     private javax.swing.JButton botonEditarConsulta;

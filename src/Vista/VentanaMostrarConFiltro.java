@@ -13,8 +13,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author sebas
+ * Clase VentanaMostrarConFiltro:
+ * Interfaz grafica la cual se ocupa para mostrar las consultas filtradas.
  */
 public class VentanaMostrarConFiltro extends javax.swing.JFrame {
     private JFrame menuPrincipal;
@@ -201,9 +201,6 @@ public class VentanaMostrarConFiltro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_boxTemas2ActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
    
     
     public void mostrarCosultas(){

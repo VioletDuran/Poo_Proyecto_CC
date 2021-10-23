@@ -20,8 +20,8 @@ import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- *
- * @author sebas
+ * VentanaMostrarGrafico:
+ * Interfaz grafica la cual se ocupa para mostrar el grafico de las consultas.
  */
 public class VentanaMostrarGrafico extends javax.swing.JFrame {
     
@@ -297,9 +297,6 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
             boxID.addItem(Integer.toString(arrayListdeIDs.getConsulta(i).getIdConsulta()));
         }
     }
-    /**
-     * @param args the command line arguments
-     */
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox boxID;

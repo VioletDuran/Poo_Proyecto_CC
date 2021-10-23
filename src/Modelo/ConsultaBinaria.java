@@ -6,22 +6,40 @@
 package Modelo;
 
 /**
- *
- * @author Zay
+ * Clase Consulta Binaria:
+ * Clase hija desde Consula.
  */
 public class ConsultaBinaria extends Consulta{
     
+    /**
+     * Atributos:
+     * respuesta: Tipo RespuestaBinaria.
+     */
     private RespuestaBinaria respuesta;
-
+    
+    /**
+     * Constructor:
+     * Se inicializa el atributo.
+     */
     public ConsultaBinaria() {
         this.respuesta = new RespuestaBinaria();
     }
-   
+    
+    /**
+     * SobreEscritura de getRespuestaConsulta:
+     * Se retorna la respuesta.
+     * @return Retorna Respuesta.
+     */
     @Override
     public Object getRespuestasConsulta() {
         return respuesta;
     }
 
+    /**
+     * SobreEscritura de setRespuestaConsulta:
+     * Se setea la respuesta.
+     * @param respuesta: Respuesta a setear.
+     */
     @Override
     public void setRespuestasConsulta(Object respuesta) {
         if((Boolean)respuesta == true)

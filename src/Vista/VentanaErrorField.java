@@ -6,8 +6,8 @@
 package Vista;
 
 /**
- *
- * @author sebas
+ * Clase VentanaErrorField:
+ * Interfaz grafica la cual se ocupa para mostrar un mensaje en caso de error.
  */
 public class VentanaErrorField extends javax.swing.JFrame {
 
@@ -72,9 +72,6 @@ public class VentanaErrorField extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonOKActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

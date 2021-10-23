@@ -12,8 +12,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author Zay
+ * Clase VentanaAgregarRespuestaMultiple:
+ * Interfaz grafica la cual se ocupa para agregar una consulta multiple.
  */
 public class VentanaAgregarRespuestaMultiple extends javax.swing.JFrame {
 
@@ -232,9 +232,6 @@ public class VentanaAgregarRespuestaMultiple extends javax.swing.JFrame {
         boxVoto.addItem("Desacuerdo");
         boxVoto.addItem("Muy en desacuerdo");
     }
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

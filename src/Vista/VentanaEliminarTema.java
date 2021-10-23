@@ -13,8 +13,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author Zay
+ * Clase VentanaEliminarTema:
+ * Interfaz grafica la cual se ocupa para eliminar un tema.
  */
 public class VentanaEliminarTema extends javax.swing.JFrame {
 
@@ -129,9 +129,6 @@ public class VentanaEliminarTema extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonVolverActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

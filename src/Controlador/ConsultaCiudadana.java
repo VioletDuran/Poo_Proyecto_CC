@@ -9,10 +9,16 @@ import Vista.*;
 import java.io.*;
 
 /**
- *
- * @author Sergio
+ * Clase ConsultaCiudadana:
+ * Se inicializa el programa obteniendo las entradas atraves de ManejoDeColecciones.
  */
 public class ConsultaCiudadana {
+    
+    /**
+     * Metodo main para iniciar el programa, inicializar manejo de colecciones y las ventanas graficas.
+     * @param args
+     * @throws IOException 
+     */
     
     public static void main(String [] args) throws IOException{
         ManejoDeColecciones manejo = new ManejoDeColecciones();

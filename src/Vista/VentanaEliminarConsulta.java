@@ -12,8 +12,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author Miguel
+ * Clase VentanaEliminarConsulta:
+ * Interfaz grafica la cual se ocupa para eliminar una consulta.
  */
 public class VentanaEliminarConsulta extends javax.swing.JFrame {
     private ManejoDeColecciones manejo;
@@ -177,9 +177,7 @@ public class VentanaEliminarConsulta extends javax.swing.JFrame {
             boxID.addItem(Integer.toString(arrayListdeIDs.getConsulta(i).getIdConsulta()));
         }
     }
-    /**
-     * @param args the command line arguments
-     */
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botonAtras;

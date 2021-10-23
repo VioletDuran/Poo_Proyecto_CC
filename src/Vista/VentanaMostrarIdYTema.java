@@ -8,7 +8,6 @@ package Vista;
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
 import Modelo.Consulta;
-import Modelo.Reportable;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -25,10 +24,10 @@ import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 /**
- *
- * @author sebas
+ * VentanaMostrarIdYTema:
+ * Interfaz grafica la cual se ocupa para mostrar el id y tema de las consultas.
  */
-public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reportable {
+public class VentanaMostrarIdYTema extends javax.swing.JFrame  {
 
     private JFrame menuPrincipal;
     private ManejoDeColecciones manejo;
@@ -45,64 +44,6 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
         this.setLocationRelativeTo(null);
     }
 
-    @Override
-    public void generarTxt(){
-        String filePath = ("./consultaFiltrada.txt");
-        File file = new File(filePath);
-        try{
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < tablaConsulta.getRowCount(); i++) {
-                for (int j = 0; j < tablaConsulta.getColumnCount(); j++) {
-                    if (tablaConsulta.getValueAt(i, j) != null) {
-                        bw.write(tablaConsulta.getValueAt(i,j).toString()+", ");
-                    }
-                }
-                bw.write("\n");
-            }
-            bw.close();
-            fw.close();
-            this.aviso = new VentanaErrorField("Txt consulta filtrada realizado con exito!");
-            this.aviso.setVisible(true);
-            return;
-        } catch(IOException ex){
-            System.out.println(ex);
-        }
-        
-    }
-    
-    @Override
-    public void generarExcel() {
-        try{
-            Workbook wb = new XSSFWorkbook();
-            Sheet sheet = wb.createSheet("Data");
-            Row rowCol = sheet.createRow(0);
-            for (int i = 0; i < tablaConsulta.getColumnCount(); i++) {
-                Cell cell = rowCol.createCell(i);
-                cell.setCellValue(tablaConsulta.getColumnName(i));
-            }
-            for (int j = 0; j < tablaConsulta.getRowCount(); j++) {
-                Row row = sheet.createRow(j+1);
-                for (int k = 0; k < tablaConsulta.getColumnCount(); k++) {
-                    Cell cell = row.createCell(k);
-                    if (tablaConsulta.getValueAt(j, k) != null) {
-                        cell.setCellValue(tablaConsulta.getValueAt(j, k).toString());
-                    }
-                }
-            }
-            FileOutputStream out = new FileOutputStream(new File("consultaFiltrada.xlsx"));
-            wb.write(out);
-            wb.close();
-            out.close();
-            this.aviso = new VentanaErrorField("Excel realizado con exito!");
-            this.aviso.setVisible(true);
-            return;
-        }catch(FileNotFoundException e){
-                    System.out.println(e);
-        }catch(IOException io){
-                    System.out.println(io);
-        }
-    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -122,9 +63,7 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
         boxTemas = new javax.swing.JComboBox();
         boxID = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaConsulta = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        tablaConsultas = new javax.swing.JTable();
 
         botonVolverMenu.setText("Volver menu");
         botonVolverMenu.addActionListener(new java.awt.event.ActionListener() {
@@ -175,30 +114,19 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
             }
         });
 
-        tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
+        tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null, null, null, null, null}
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra", "Likes", "Dislikes"
+                "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra"
             }
         ));
-        tablaConsulta.setRowHeight(30);
-        jScrollPane1.setViewportView(tablaConsulta);
-
-        jButton1.setText("Generar Excel");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setText("Generar txt");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        tablaConsultas.setRowHeight(30);
+        jScrollPane1.setViewportView(tablaConsultas);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -210,7 +138,6 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(152, 152, 152))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(112, 112, 112)
                 .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -218,37 +145,33 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
                 .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(134, 134, 134))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(357, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(botonMostrarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(402, 402, 402))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(371, 371, 371))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(361, 361, 361))))
+                .addContainerGap(25, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1000, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(380, 380, 380)
+                        .addGap(443, 443, 443)
+                        .addComponent(botonMostrarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(459, 459, 459)
                         .addComponent(botonVolverMenu1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(318, 318, 318)
-                        .addComponent(jButton1)
-                        .addGap(32, 32, 32)
-                        .addComponent(jButton2)))
+                        .addGap(406, 406, 406)
+                        .addComponent(jLabel4))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(439, 439, 439)
+                        .addComponent(jLabel1)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(41, 41, 41)
+                .addGap(59, 59, 59)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addGap(36, 36, 36)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3))
@@ -256,17 +179,13 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addComponent(botonMostrarConsultas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
                 .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(botonMostrarConsultas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addComponent(botonVolverMenu1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(32, 32, 32))
         );
 
         pack();
@@ -302,24 +221,22 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
 
     }//GEN-LAST:event_boxIDActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        generarExcel();
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        generarTxt();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
     public void mostrarConsultaTemaID() {
-        tablaConsulta.setModel(new javax.swing.table.DefaultTableModel(
-                manejo.matrizTemasEId((String) boxTemas.getSelectedItem(), (String)boxID.getSelectedItem()),
+        String [][] matrizAux  =manejo.matrizTemasEId((String) boxTemas.getSelectedItem(), (String)boxID.getSelectedItem());
+        if(matrizAux[0].length == 9){
+            tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(matrizAux,
                 new String[]{
-                    "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra", "Likes", "Dislikes"
+                    "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra"
                 }
         ));
+        }
+        else{
+            tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(matrizAux,
+                new String[]{
+                    "Tema", "ID", "Titulo Consulta", "Descripcion", "Likes", "Dislikes"
+                }
+        ));
+        }
     }
 
     public void mostrarTemas(){
@@ -344,13 +261,11 @@ public class VentanaMostrarIdYTema extends javax.swing.JFrame implements Reporta
     private javax.swing.JButton botonVolverMenu1;
     private javax.swing.JComboBox boxID;
     private javax.swing.JComboBox boxTemas;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable tablaConsulta;
+    private javax.swing.JTable tablaConsultas;
     // End of variables declaration//GEN-END:variables
 }

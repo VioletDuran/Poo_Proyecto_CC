@@ -6,20 +6,38 @@
 package Modelo;
 
 /**
- *
- * @author Zay
+ * Clase ConsultaMultiple:
+ * Clase hija desde la clase Consulta.
  */
 public class ConsultaMultiple extends Consulta {
     
+    /**
+     * Atributos:
+     * respuesta: tipo RespuestaMultiple.
+     */
     private RespuestaMultiple respuesta;
 
+    /**
+     * Constructor:
+     * Se inicializa Respuesta Multiple.
+     */
     public ConsultaMultiple() {
         this.respuesta = new RespuestaMultiple();
     }
- 
+    
+    /**
+     * SobreEscritura de RespuestaConsulta:
+     * Se retorna la respuesta.
+     * @return Retorno de la respuesta.
+     */
     @Override
     public Object getRespuestasConsulta() {
         return respuesta;
+        
+    /**
+     * SobreEscritura de setRespuestasConsulta.
+     * Se setean las respuestas.
+     */
     }
     @Override
     public void setRespuestasConsulta(Object respuesta) {

@@ -13,8 +13,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author Miguel
+ * Clase VentanaEditarPregunta:
+ * Interfaz grafica la cual se ocupa para editar una consulta.
  */
 public class VentanaEditarPregunta extends javax.swing.JFrame {
     private ManejoDeColecciones manejo;
@@ -179,9 +179,6 @@ public class VentanaEditarPregunta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boxIDActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public void mostrarTemas(){
         HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
         

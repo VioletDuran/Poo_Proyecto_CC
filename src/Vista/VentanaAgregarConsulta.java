@@ -10,18 +10,19 @@ import Modelo.*;
 import javax.swing.JFrame;
 
 /**
- *
- * @author sebas
+ * Clase VentanaAgregarConsulta:
+ * Interfaz grafica la cual se ocupa para agregar una consulta.
  */
-public class VentanaAnadir extends javax.swing.JFrame {
+public class VentanaAgregarConsulta extends javax.swing.JFrame {
+
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
     private VentanaErrorField error;
-    
-    public VentanaAnadir(ManejoDeColecciones manejo, JFrame menuPrincipal) {
+
+    public VentanaAgregarConsulta(ManejoDeColecciones manejo, JFrame menuPrincipal) {
         initComponents();
-        this.manejo= manejo;
-        this.menuPrincipal= menuPrincipal;
+        this.manejo = manejo;
+        this.menuPrincipal = menuPrincipal;
         this.setLocationRelativeTo(null);
     }
 
@@ -35,8 +36,8 @@ public class VentanaAnadir extends javax.swing.JFrame {
     private void initComponents() {
 
         jButton1 = new javax.swing.JButton();
+        grupoBotonTipoComsilta = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        fieldDeTema = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         fieldDeIdConsulta = new javax.swing.JTextField();
@@ -48,17 +49,13 @@ public class VentanaAnadir extends javax.swing.JFrame {
         fieldDescripcionConsulta = new javax.swing.JTextField();
         botonOK = new javax.swing.JButton();
         botonVolverMenu = new javax.swing.JButton();
+        fieldDeTema = new javax.swing.JTextField();
+        botonConsultaMultiple = new javax.swing.JRadioButton();
+        botonConsultaSimple = new javax.swing.JRadioButton();
 
         jButton1.setText("jButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
-
-        fieldDeTema.setEditable(false);
-        fieldDeTema.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                fieldDeTemaActionPerformed(evt);
-            }
-        });
 
         jLabel2.setText("Ingrese Tema:");
 
@@ -100,106 +97,125 @@ public class VentanaAnadir extends javax.swing.JFrame {
             }
         });
 
+        grupoBotonTipoComsilta.add(botonConsultaMultiple);
+        botonConsultaMultiple.setText("Consulta Multiple");
+
+        grupoBotonTipoComsilta.add(botonConsultaSimple);
+        botonConsultaSimple.setText("Consulta Simple");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(38, 38, 38)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(botonVolverMenu)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
+                        .addGap(43, 43, 43)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(158, 158, 158)
-                                .addComponent(jLabel5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(78, 78, 78)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jLabel3))
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel7)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(fieldDeTema, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGap(157, 157, 157)
-                                    .addComponent(jLabel1)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(fieldDescripcionConsulta, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(fieldDeIdConsulta, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(fieldTituloConsulta, javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
-                .addGap(51, 66, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonOK)
-                .addGap(37, 37, 37))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(fieldDescripcionConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(fieldDeIdConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel1))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(fieldTituloConsulta, javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addComponent(fieldDeTema, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel7)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(158, 158, 158)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel5)
+                                            .addComponent(botonOK))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(botonVolverMenu))
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap(8, Short.MAX_VALUE)
+                                .addComponent(botonConsultaMultiple)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addComponent(botonConsultaSimple)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(68, 68, 68)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel2)
+                .addGap(18, 18, 18)
                 .addComponent(fieldDeTema, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel3)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel1)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(13, 13, 13)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(fieldDeIdConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(fieldTituloConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, 0)
+                .addComponent(fieldDeIdConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel6)
+                .addGap(18, 18, 18)
+                .addComponent(fieldTituloConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(fieldDescripcionConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 26, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonConsultaSimple)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel5))
+                    .addComponent(botonConsultaMultiple, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonOK)
-                    .addComponent(botonVolverMenu))
-                .addGap(18, 18, 18))
+                    .addComponent(botonVolverMenu)
+                    .addComponent(botonOK))
+                .addContainerGap(19, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void fieldTituloConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldTituloConsultaActionPerformed
-        
+
     }//GEN-LAST:event_fieldTituloConsultaActionPerformed
 
     private void botonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOKActionPerformed
-        if(manejo.existeIdEnConsultas(fieldDeTema.getText(), Integer.parseInt(fieldDeIdConsulta.getText()))){
-            this.error= new VentanaErrorField("Ya existe esta id, Ingrese otra");
+        
+        String auxTema;
+        String auxDescripcion;
+        int auxIdConsulta;
+        String auxTituloConsulta;
+        
+        if (manejo.existeIdEnConsultas(fieldDeTema.getText(), Integer.parseInt(fieldDeIdConsulta.getText()))) {
+            this.error = new VentanaErrorField("Ya existe esta id, Ingrese otra");
             this.error.setVisible(true);
             return;
         }
-        ConsultaBinaria nuevaConsulta= new ConsultaBinaria();
-        nuevaConsulta.setTituloTema(fieldDeTema.getText());
-        nuevaConsulta.setDescripcion(fieldDescripcionConsulta.getText());
-        nuevaConsulta.setIdConsulta(Integer.parseInt(fieldDeIdConsulta.getText()));
-        nuevaConsulta.setTituloConsulta(fieldTituloConsulta.getText());
-        manejo.agregarConsulta(nuevaConsulta);
+        
+        auxTema = fieldDeTema.getText();
+        auxDescripcion = fieldDescripcionConsulta.getText();
+        auxIdConsulta = Integer.parseInt(fieldDeIdConsulta.getText());
+        auxTituloConsulta = fieldTituloConsulta.getText();
+        manejo.agregarConsulta(auxTema, auxIdConsulta, auxTituloConsulta, auxDescripcion, botonConsultaSimple.isSelected());
+        
         this.setVisible(false);
         this.menuPrincipal.setVisible(true);
         this.dispose();
-        
-        
-    }//GEN-LAST:event_botonOKActionPerformed
 
-    private void fieldDeTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDeTemaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_fieldDeTemaActionPerformed
+
+    }//GEN-LAST:event_botonOKActionPerformed
 
     private void fieldDescripcionConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_fieldDescripcionConsultaActionPerformed
         // TODO add your handling code here:
@@ -215,18 +231,17 @@ public class VentanaAnadir extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonVolverMenuActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton botonConsultaMultiple;
+    private javax.swing.JRadioButton botonConsultaSimple;
     private javax.swing.JButton botonOK;
     private javax.swing.JButton botonVolverMenu;
     private javax.swing.JTextField fieldDeIdConsulta;
     private javax.swing.JTextField fieldDeTema;
     private javax.swing.JTextField fieldDescripcionConsulta;
     private javax.swing.JTextField fieldTituloConsulta;
+    private javax.swing.ButtonGroup grupoBotonTipoComsilta;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

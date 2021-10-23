@@ -9,8 +9,8 @@ import Controlador.ManejoDeColecciones;
 import javax.swing.JFrame;
 
 /**
- *
- * @author Zay
+ * Clase VentanaAgregarTema:
+ * Interfaz grafica la cual se ocupa para agregar un tema.
  */
 public class VentanaAgregarTema extends javax.swing.JFrame {
 
@@ -104,9 +104,6 @@ public class VentanaAgregarTema extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonAgregarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

@@ -12,8 +12,8 @@ import java.util.Map;
 import javax.swing.JFrame;
 
 /**
- *
- * @author Zay
+ * Clase VentanaEditarTema:
+ * Interfaz grafica la cual se ocupa para editar un tema.
  */
 public class VentanaEditarTema extends javax.swing.JFrame {
 
