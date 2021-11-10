@@ -233,7 +233,7 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
         datos.setValue(aux.getNeutro(), "Neutro","");
         datos.setValue(aux.getContra(), "Contra","");
         datos.setValue(aux.getmContra(), "Muy En Contra","");
-        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica Poblacional", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
+        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica de votos", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
         ChartPanel panel = new ChartPanel(graficoBarras);
         panel.setPreferredSize(new Dimension(400,300));
         panelGrafico.setLayout(new BorderLayout());
@@ -251,7 +251,7 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         datos.setValue(aux.getLikes(), "Likes", "");
         datos.setValue(aux.getDisLikes(), "Dislikes", "");
-        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica Poblacional", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
+        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica de votos", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
         ChartPanel panel = new ChartPanel(graficoBarras);
         panel.setPreferredSize(new Dimension(400,300));
         panelGrafico.setLayout(new BorderLayout());

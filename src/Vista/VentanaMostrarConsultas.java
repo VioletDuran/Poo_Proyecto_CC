@@ -180,12 +180,14 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
                     }
             ));
         } else {
-            tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
-                    manejo.matrizConsultasMultiple(),
-                    new String[]{
-                        "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra"
-                    }
-            ));
+            if (botonConsultasMultiples.isSelected()) {
+                tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
+                        manejo.matrizConsultasMultiple(),
+                        new String[]{
+                            "Tema", "ID", "Titulo Consulta", "Descripcion", "Muy a favor", "A favor", "Neutro", "En contra", "Muy en contra"
+                        }
+                ));
+            }
         }
     }//GEN-LAST:event_botonMostrarConsultasActionPerformed
 

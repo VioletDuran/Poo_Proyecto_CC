@@ -556,24 +556,23 @@ public class ManejoDeColecciones {
      * @param id: id dentro del ArrayList de la consuta para buscar.
      * @return Se retorna la matriz llena.
      */
-    public String[][] matrizTemasEId(String tema, String id) {
-
+    public String[][] matrizMasVotos(Consulta auxConsulta) {
+        if(auxConsulta == null){
+            return null;
+        }
         String matriz[][];
-        HashMap<String, ArrayListConsultas> auxMapa = getConsultas();
-        Consulta ConsultaFiltrada;
         
         RespuestaMultiple respuestsMultiple;
         RespuestaBinaria respuestaBinaria;
-        ConsultaFiltrada = mostrarConsultasPorTema(tema).getConsultaPorId(id);
-        if (ConsultaFiltrada instanceof ConsultaMultiple) {
+        if (auxConsulta instanceof ConsultaMultiple) {
             
             matriz = new String[tamMapa()][9];
-            respuestsMultiple = (RespuestaMultiple) ConsultaFiltrada.getRespuestasConsulta();
+            respuestsMultiple = (RespuestaMultiple) auxConsulta.getRespuestasConsulta();
 
-            matriz[0][0] = Integer.toString(ConsultaFiltrada.getIdConsulta());
-            matriz[0][1] = ConsultaFiltrada.getTituloTema();
-            matriz[0][2] = ConsultaFiltrada.getTituloConsulta();
-            matriz[0][3] = ConsultaFiltrada.getDescripcion();
+            matriz[0][0] = Integer.toString(auxConsulta.getIdConsulta());
+            matriz[0][1] = auxConsulta.getTituloTema();
+            matriz[0][2] = auxConsulta.getTituloConsulta();
+            matriz[0][3] = auxConsulta.getDescripcion();
             matriz[0][4] = Integer.toString(respuestsMultiple.getmFavor()); // Opiniones Muy a favor 
             matriz[0][5] = Integer.toString(respuestsMultiple.getaFavor()); // Opiniones a Favor
             matriz[0][6] = Integer.toString(respuestsMultiple.getNeutro()); // Opiniones Neutras
@@ -583,12 +582,12 @@ public class ManejoDeColecciones {
         else{
             
             matriz = new String[tamMapa()][6];
-            respuestaBinaria = (RespuestaBinaria) ConsultaFiltrada.getRespuestasConsulta();
+            respuestaBinaria = (RespuestaBinaria) auxConsulta.getRespuestasConsulta();
             
-            matriz[0][0] = Integer.toString(ConsultaFiltrada.getIdConsulta());
-            matriz[0][1] = ConsultaFiltrada.getTituloTema();
-            matriz[0][2] = ConsultaFiltrada.getTituloConsulta();
-            matriz[0][3] = ConsultaFiltrada.getDescripcion();
+            matriz[0][0] = Integer.toString(auxConsulta.getIdConsulta());
+            matriz[0][1] = auxConsulta.getTituloTema();
+            matriz[0][2] = auxConsulta.getTituloConsulta();
+            matriz[0][3] = auxConsulta.getDescripcion();
             matriz[0][4] = Integer.toString(respuestaBinaria.getLikes());
             matriz[0][5] = Integer.toString(respuestaBinaria.getDisLikes());
         }
@@ -638,4 +637,43 @@ public class ManejoDeColecciones {
         }
         return matriz;
     }
+    
+    public int contarVotosBinarios(ConsultaBinaria consultaAContar){
+        int contadorVotos = 0;
+        RespuestaBinaria aux = ((RespuestaBinaria)consultaAContar.getRespuestasConsulta());
+        contadorVotos = aux.getLikes() + aux.getDisLikes();
+        return contadorVotos;
+    }
+    public int contarVotosMultiples(ConsultaMultiple consultaAContar){
+        int contadorVotos = 0;
+        RespuestaMultiple aux = ((RespuestaMultiple)consultaAContar.getRespuestasConsulta());
+        contadorVotos = aux.getContra() + aux.getNeutro() + aux.getaFavor() + aux.getmContra() + aux.getmFavor();
+        return contadorVotos;
+    }
+    
+    public String[][] ConsultaMasVotada(String TemaBuscado){
+        String[][] matriz;
+        ArrayListConsultas auxConsultaTema = this.consultas.get(TemaBuscado);
+        int contadorTotalVotos = 0;
+        Consulta ConsultaMayorVotos = null;
+        for (int i = 0; i < auxConsultaTema.sizeConsultas(); i++) {
+            if(auxConsultaTema.getConsulta(i) instanceof ConsultaBinaria){
+                if(contarVotosBinarios((ConsultaBinaria) auxConsultaTema.getConsulta(i)) > contadorTotalVotos){
+                    contadorTotalVotos = contarVotosBinarios((ConsultaBinaria) auxConsultaTema.getConsulta(i));
+                    ConsultaMayorVotos = auxConsultaTema.getConsulta(i);
+                }
+            }
+            if(auxConsultaTema.getConsulta(i) instanceof ConsultaMultiple){
+                if(contarVotosMultiples((ConsultaMultiple) auxConsultaTema.getConsulta(i)) > contadorTotalVotos){
+                    contadorTotalVotos = contarVotosMultiples((ConsultaMultiple) auxConsultaTema.getConsulta(i));
+                    ConsultaMayorVotos = auxConsultaTema.getConsulta(i);
+                }
+            }
+        }
+        matriz = matrizMasVotos(ConsultaMayorVotos);
+        if(matriz == null){
+            return null;
+        }
+        return matriz;
+    } 
 }

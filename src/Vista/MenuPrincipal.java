@@ -23,7 +23,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private VentanaEditarPregunta editarConsulta;
     private VentanaEliminarConsulta eliminarConsulta;
     private VentanaMostrarConFiltro mostrarFiltro;
-    private VentanaMostrarIdYTema mostrarIdFiltro;
+    private VentanaMostrarMasVotos mostrarIdFiltro;
     private VentanaMostrarGrafico mostrarGrafico;
     private VentanaAgregarRespuestaBinaria anadirRespuesta;
     private VentanaEliminarTema eliminarTema;
@@ -130,7 +130,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
-        botonConsultaTemaEID.setText("Ver Consulta por Tema e ID");
+        botonConsultaTemaEID.setText("Ver Consulta Con Mas Votos");
         botonConsultaTemaEID.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botonConsultaTemaEIDActionPerformed(evt);
@@ -298,7 +298,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void botonConsultaTemaEIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultaTemaEIDActionPerformed
         this.setVisible(false);
-        this.mostrarIdFiltro= new VentanaMostrarIdYTema(this, manejo);
+        this.mostrarIdFiltro= new VentanaMostrarMasVotos(this, manejo);
         mostrarIdFiltro.setVisible(true);
         mostrarIdFiltro.mostrarTemas();
     }//GEN-LAST:event_botonConsultaTemaEIDActionPerformed

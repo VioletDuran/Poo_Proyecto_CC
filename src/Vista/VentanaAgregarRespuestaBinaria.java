@@ -191,7 +191,8 @@ public class VentanaAgregarRespuestaBinaria extends javax.swing.JFrame {
         if(botonLike.isSelected()){
             manejo.agregarRespuesta((String)boxTemas.getSelectedItem(),(String)boxID.getSelectedItem(), true);
         }else{
-            manejo.agregarRespuesta((String)boxTemas.getSelectedItem(),(String)boxID.getSelectedItem(), false);
+            if(botonDislike.isSelected())
+                manejo.agregarRespuesta((String)boxTemas.getSelectedItem(),(String)boxID.getSelectedItem(), false);
         } 
         this.setVisible(false);
         this.menuPrincipal.setVisible(true);

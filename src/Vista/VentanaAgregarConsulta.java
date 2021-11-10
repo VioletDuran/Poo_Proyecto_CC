@@ -208,7 +208,14 @@ public class VentanaAgregarConsulta extends javax.swing.JFrame {
         auxDescripcion = fieldDescripcionConsulta.getText();
         auxIdConsulta = Integer.parseInt(fieldDeIdConsulta.getText());
         auxTituloConsulta = fieldTituloConsulta.getText();
-        manejo.agregarConsulta(auxTema, auxIdConsulta, auxTituloConsulta, auxDescripcion, botonConsultaSimple.isSelected());
+        if(botonConsultaSimple.isSelected()){
+            manejo.agregarConsulta(auxTema, auxIdConsulta, auxTituloConsulta, auxDescripcion, botonConsultaSimple.isSelected());
+        }
+        else{
+            if(botonConsultaMultiple.isSelected())
+                manejo.agregarConsulta(auxTema, auxIdConsulta, auxTituloConsulta, auxDescripcion, botonConsultaSimple.isSelected());
+        }
+            
         
         this.setVisible(false);
         this.menuPrincipal.setVisible(true);
