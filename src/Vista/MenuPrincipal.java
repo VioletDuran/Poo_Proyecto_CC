@@ -20,7 +20,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private VentanaMostrarConsultas mostrarConsultas;
     private VentanaAgregarConsulta anadirConsulta;
     private VentanaMostrarTemas mostrarTemas;
-    private VentanaEditarPregunta editarConsulta;
+    private VentanaEditarConsulta editarConsulta;
     private VentanaEliminarConsulta eliminarConsulta;
     private VentanaMostrarConFiltro mostrarFiltro;
     private VentanaMostrarMasVotos mostrarIdFiltro;
@@ -272,7 +272,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_botonAgregarRespuestaBinariaActionPerformed
 
     private void botonEditarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarConsultaActionPerformed
-        editarConsulta = new VentanaEditarPregunta(manejo,this);
+        editarConsulta = new VentanaEditarConsulta(manejo,this);
         editarConsulta.setVisible(true);
         editarConsulta.mostrarTemas();
     }//GEN-LAST:event_botonEditarConsultaActionPerformed
@@ -307,7 +307,6 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.setVisible(false);
         this.mostrarGrafico = new VentanaMostrarGrafico (this, manejo);
         this.mostrarGrafico.setVisible(true);
-        mostrarGrafico.mostrarTemas();
     }//GEN-LAST:event_botonMostrarGraficoActionPerformed
 
     private void botonEliminarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarTemaActionPerformed

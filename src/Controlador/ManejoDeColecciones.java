@@ -118,19 +118,8 @@ public class ManejoDeColecciones {
                 break;
             }
         }
-    }
-
-    /**
-     * Metodo motrarConsultasPorTema: Retorna las consulta recibiendo por
-     * parametro la key la cual es el tema de las consultas.
-     *
-     * @param tema: Key del hashmap para encontrar las consultas.
-     * @return Retorna el ArrayList de consultas.
-     */
-    public ArrayListConsultas mostrarConsultasPorTema(String tema) {
-        return this.consultas.get(tema);
-    }
-
+    } 
+    
     /**
      * Metodo agregarConsulta: Ingresa una consulta al HashMap, si este existe
      * lo ingresa al ArrayList, sino crea un ArrayList y lo ingresa.
@@ -193,8 +182,8 @@ public class ManejoDeColecciones {
      * @param key: Key (String) a buscar en el HashMap.
      * @return Retorta el ArrayList de consultas del tema ingresado.
      */
-    public ArrayListConsultas getArray(String key) {
-        return consultas.get(key);
+    public ArrayListConsultas getArrayCopia(String key) {
+        return this.consultas.get(key).getCopiaArrayList();
     }
 
     /**
@@ -218,7 +207,7 @@ public class ManejoDeColecciones {
      */
     public HashMap<String, ArrayListConsultas> getConsultas() {
         HashMap<String, ArrayListConsultas> aux = new HashMap();
-        aux = this.consultas;
+        aux.putAll(this.consultas);
         return aux;
     }
 
@@ -353,33 +342,15 @@ public class ManejoDeColecciones {
      * @param idBuscada: id para buscar dentro del Arraylist para ver si existe.
      * @return Booleano dependiendo si es verdadero o falso.
      */
-    public boolean existeIdEnConsultas(String key, int idBuscada) {
-        if (consultas.get(key) == null) {
+    public boolean existeIdEnConsultas(String key, String idBuscada) {
+        
+        if(consultas.get(key) == null || consultas.get(key).getConsultaPorId(idBuscada) == null)
             return false;
+        else{
+            return true;
         }
-        for (int i = 0; i < consultas.get(key).sizeConsultas(); i++) {
-            if (consultas.get(key).getConsulta(i).getIdConsulta() == idBuscada) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
-     * Metodo buscarConsulta: Se busca la consulta deseada con la Key y su
-     * respectiva id.
-     *
-     * @param key: String del tema a buscar.
-     * @param idBuscada: id para buscar dentro del Arraylist del HashMap.
-     * @return La consulta deseada o null.
-     */
-    public Consulta buscarConsulta(String key, int idBuscada) {
-        for (int i = 0; i < consultas.get(key).sizeConsultas(); i++) {
-            if (consultas.get(key).getConsulta(i).getIdConsulta() == idBuscada) {
-                return consultas.get(key).getConsulta(i);
-            }
-        }
-        return null;
+        
+     
     }
 
     /**
@@ -392,13 +363,8 @@ public class ManejoDeColecciones {
      * @param tituloNuevo: String del tema para remplazar la anterior.
      * @param descripcionNueva: descripcion para remplazar la anterior.
      */
-    public void editarConsulta(String temaBuscado, int idConsultaBuscada, String tituloNuevo, String descripcionNueva) {
-        if (!tituloNuevo.equals(null)) {
-            consultas.get(temaBuscado).getConsultaPorId(idConsultaBuscada).setTituloConsulta(tituloNuevo);
-        }
-        if (!descripcionNueva.equals(null)) {
-            consultas.get(temaBuscado).getConsultaPorId(idConsultaBuscada).setDescripcion(descripcionNueva);
-        }
+    public void editarConsulta(String temaBuscado, int idConsultaBuscada, String tituloNuevo, String descripcionNueva){
+        consultas.get(temaBuscado).editaTituloYDescripcion(tituloNuevo, descripcionNueva , idConsultaBuscada);    
     }
 
     /**
@@ -409,7 +375,7 @@ public class ManejoDeColecciones {
      * @return ArrayList de consultas del tema deseado.
      */
     public ArrayListConsultas getConsultasPorTema(String TemaBuscado) {
-        return consultas.get(TemaBuscado);
+        return consultas.get(TemaBuscado).getCopiaArrayList();
     }
 
     /**
@@ -513,12 +479,10 @@ public class ManejoDeColecciones {
      * @param temaEditado: String del tema para reemplazar.
      */
     public void EditarTema(String temaAEditar, String temaEditado) {
-        ArrayListConsultas auxConsultas = consultas.get(temaAEditar);
-        auxConsultas.editarTemaConsultas(temaEditado);
+        consultas.get(temaAEditar).editarTemaConsultas(temaEditado);
+        ArrayListConsultas auxConsultas = consultas.get(temaAEditar).getCopiaArrayList();
         consultas.remove(temaAEditar);
-        for (int i = 0; i < auxConsultas.sizeConsultas(); i++) {
-            agregarConsulta(auxConsultas.getConsulta(i));
-        }
+        consultas.put(temaEditado, auxConsultas);
     }
 
     /**
@@ -527,8 +491,10 @@ public class ManejoDeColecciones {
      * @param nuevoTema: String del tema a agregar.
      */
     public void AgregarTema(String nuevoTema) {
-        ArrayListConsultas auxConsultas = new ArrayListConsultas();
-        consultas.put(nuevoTema, auxConsultas);
+        if(!consultas.containsKey(nuevoTema)){
+            ArrayListConsultas auxConsultas = new ArrayListConsultas();
+            consultas.put(nuevoTema, auxConsultas);
+        }
     }
 
     /**
@@ -606,7 +572,7 @@ public class ManejoDeColecciones {
         String matriz[][] = new String[tamMapa()][11];
         HashMap<String, ArrayListConsultas> auxMapa = getConsultas();
         ArrayListConsultas arraylistFiltrado;
-        arraylistFiltrado = mostrarConsultasPorTema(tema1);
+        arraylistFiltrado = getArrayCopia(tema1);
         RespuestaMultiple respuestsMultiple = new RespuestaMultiple();
         RespuestaBinaria respuestaBinaria = new RespuestaBinaria();
         int k = 0;
@@ -633,17 +599,26 @@ public class ManejoDeColecciones {
                 k++;
             }
 
-            arraylistFiltrado = mostrarConsultasPorTema(tema2);
+            arraylistFiltrado = getArrayCopia(tema2);
         }
         return matriz;
     }
     
+    /**
+     * @param consultaAContar: Se recibe la consulta Binaria para contar votos
+     * @return Se retorna la cantidad total de votos.
+     */
     public int contarVotosBinarios(ConsultaBinaria consultaAContar){
         int contadorVotos = 0;
         RespuestaBinaria aux = ((RespuestaBinaria)consultaAContar.getRespuestasConsulta());
         contadorVotos = aux.getLikes() + aux.getDisLikes();
         return contadorVotos;
     }
+    
+    /**
+     * @param consultaAContar: Se recibe la consulta Multiple para contar votos
+     * @return Se retorna la cantidad total de votos.
+     */
     public int contarVotosMultiples(ConsultaMultiple consultaAContar){
         int contadorVotos = 0;
         RespuestaMultiple aux = ((RespuestaMultiple)consultaAContar.getRespuestasConsulta());
@@ -651,6 +626,10 @@ public class ManejoDeColecciones {
         return contadorVotos;
     }
     
+    /**
+     * @param TemaBuscado: Se recibe el string del tema buscado.
+     * @return Se retorna la matriz llena en caso de que se encuentre el mas votado, si no se retorna null.
+     */
     public String[][] ConsultaMasVotada(String TemaBuscado){
         String[][] matriz;
         ArrayListConsultas auxConsultaTema = this.consultas.get(TemaBuscado);
@@ -676,4 +655,21 @@ public class ManejoDeColecciones {
         }
         return matriz;
     } 
+  
+    /**
+     * @param tema: Se recibe el tema a eliminar
+     * @param id: Se recibe el id a eliminar
+     */
+    public void eliminarConsulta(String tema , int id ){
+        this.consultas.get(tema).removeConsulta(id);
+    }
+    
+    /**
+     * @param tema: Se recibe el tema a buscar.
+     * @param id: Se recibe el id a buscar.
+     * @return Se retorna la consulta deseada.
+     */
+    public Consulta buscarConsultaPorId(String tema , String id){
+        return consultas.get(tema).getConsultaPorId(id);
+    }
 }

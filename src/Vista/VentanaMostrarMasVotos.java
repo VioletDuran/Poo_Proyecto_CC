@@ -7,21 +7,10 @@ package Vista;
 
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
-import Modelo.Consulta;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
-import org.apache.poi.ss.usermodel.Sheet;
-import org.apache.poi.ss.usermodel.Workbook;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
 
 /**
  * VentanaMostrarIdYTema:
@@ -32,7 +21,6 @@ public class VentanaMostrarMasVotos extends javax.swing.JFrame  {
     private JFrame menuPrincipal;
     private ManejoDeColecciones manejo;
     private VentanaErrorField error;
-    private VentanaErrorField aviso;
 
     /**
      * Creates new form VentanaMostrarIdYTema
@@ -203,7 +191,6 @@ public class VentanaMostrarMasVotos extends javax.swing.JFrame  {
         if(matrizAux == null){
             this.error = new VentanaErrorField("No existe consulta con votos.");
             this.error.setVisible(true);
-            return;
         }else{
             if (matrizAux[0].length == 9) {
                 tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(matrizAux,
@@ -224,9 +211,8 @@ public class VentanaMostrarMasVotos extends javax.swing.JFrame  {
 
     public void mostrarTemas(){
         HashMap<String,ArrayListConsultas> auxMapa = manejo.getConsultas();
-        
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+            if(this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0)
                 boxTemas.addItem(set.getKey());
         }
     }

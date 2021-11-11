@@ -15,7 +15,7 @@ public class ArrayListConsultas {
     /**
      * Atributo: Consultas el cual es un ArrayList de consultas
      */
-    private ArrayList<Consulta>consultas;
+    private ArrayList<Consulta> consultas;
     
     /**
      * Constructor:
@@ -54,11 +54,10 @@ public class ArrayListConsultas {
     /**
      * Metodo removeConsulta:
      * Se quita la consulta solicitada
-     * @param consulta: Consulta para retirar
+     * @param idConsultaEliminada: La id de la consulta para retirar
      */
-    public void removeConsulta(Consulta consulta){
-        if(consulta != null)
-            this.consultas.remove(consulta);
+    public void removeConsulta(int idConsultaEliminada){
+        consultas.remove(getConsultaPorId(idConsultaEliminada));
     }
     
     /**
@@ -101,5 +100,18 @@ public class ArrayListConsultas {
         for(int i = 0 ; i < consultas.size() ; i++){
             consultas.get(i).setTituloTema(tema);
         }
+    }
+    
+    public ArrayListConsultas getCopiaArrayList( ){
+       ArrayListConsultas aux = new ArrayListConsultas();
+       for(int i = 0 ; i < this.consultas.size() ; i++){
+           aux.setConsulta(this.consultas.get(i));
+       }
+       return aux;
+    }
+    
+    public void editaTituloYDescripcion(String tituloNuevo, String descripcionNueva, int idBuscada){
+        this.getConsulta(idBuscada).setTituloConsulta(tituloNuevo);
+        this.getConsulta(idBuscada).setDescripcion(descripcionNueva);
     }
 }

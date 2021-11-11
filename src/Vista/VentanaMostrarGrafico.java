@@ -5,34 +5,31 @@
  */
 package Vista;
 
-
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
 import Modelo.*;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.awt.*;
+import java.util.*;
 import javax.swing.JFrame;
 import org.jfree.chart.*;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
 /**
- * VentanaMostrarGrafico:
- * Interfaz grafica la cual se ocupa para mostrar el grafico de las consultas.
+ * VentanaMostrarGrafico: Interfaz grafica la cual se ocupa para mostrar el
+ * grafico de las consultas.
  */
 public class VentanaMostrarGrafico extends javax.swing.JFrame {
-    
-        private ManejoDeColecciones manejo;
-        private JFrame menuPrincipal;
+
+    private ManejoDeColecciones manejo;
+    private JFrame menuPrincipal;
+
     /**
      * Creates new form VentanaMostrarGrafico
      */
-    public VentanaMostrarGrafico(JFrame menuPrincipal , ManejoDeColecciones manejo) {
+    public VentanaMostrarGrafico(JFrame menuPrincipal, ManejoDeColecciones manejo) {
         initComponents();
-        this.manejo= manejo;
+        this.manejo = manejo;
         this.menuPrincipal = menuPrincipal;
         this.setLocationRelativeTo(null);
     }
@@ -46,6 +43,7 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         textoIngresoA = new javax.swing.JLabel();
         textoIngresoB = new javax.swing.JLabel();
         graficarConsulta = new javax.swing.JButton();
@@ -60,6 +58,8 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
         volverMenuPrincipal = new javax.swing.JButton();
         boxTemas = new javax.swing.JComboBox();
         boxID = new javax.swing.JComboBox();
+        botonConsultasSimple = new javax.swing.JRadioButton();
+        botonConsultasMultiples = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
 
@@ -115,6 +115,22 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
             }
         });
 
+        buttonGroup1.add(botonConsultasSimple);
+        botonConsultasSimple.setText("Mostrar Consultas Simple");
+        botonConsultasSimple.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsultasSimpleActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(botonConsultasMultiples);
+        botonConsultasMultiples.setText("Mostrar Consultas Multiples");
+        botonConsultasMultiples.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonConsultasMultiplesActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -142,11 +158,11 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 309, Short.MAX_VALUE)
                                 .addComponent(volverMenuPrincipal))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(220, 220, 220)
-                        .addComponent(jLabel1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(201, 201, 201)
-                        .addComponent(graficarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonConsultasMultiples)
+                        .addGap(183, 183, 183)
+                        .addComponent(botonConsultasSimple)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addGap(26, 26, 26))
             .addGroup(layout.createSequentialGroup()
                 .addGap(27, 27, 27)
@@ -154,6 +170,8 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
                     .addComponent(textoIngresoA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(boxTemas, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(graficarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(textoIngresoB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(boxID, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -162,23 +180,35 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(panelGrafico, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(232, 232, 232)
+                .addComponent(jLabel1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1)
-                .addGap(14, 14, 14)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(43, 43, 43)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textoIngresoA)
+                            .addComponent(textoIngresoB))
+                        .addGap(26, 26, 26)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(46, 46, 46))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1)
+                        .addGap(69, 69, 69)
+                        .addComponent(graficarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textoIngresoA)
-                    .addComponent(textoIngresoB))
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(boxTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(boxID, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(22, 22, 22)
-                .addComponent(graficarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                    .addComponent(botonConsultasMultiples)
+                    .addComponent(botonConsultasSimple))
+                .addGap(93, 93, 93)
                 .addComponent(panelGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(167, 167, 167)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -206,60 +236,59 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
     private void graficarConsultaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_graficarConsultaActionPerformed
         // TODO add your handling code here:
         panelGrafico.removeAll();
-        String tema = (String)boxTemas.getSelectedItem();
-        int idConsulta = Integer.parseInt((String)boxID.getSelectedItem());
-        HashMap<String,ArrayListConsultas> aux = manejo.getConsultas();
-        ArrayListConsultas auxConsultas = aux.get(tema);
-        for(int i = 0; i < auxConsultas.sizeConsultas(); i++){
-            if(auxConsultas.getConsulta(i).getIdConsulta() == idConsulta){
-                if(auxConsultas.getConsulta(i) instanceof ConsultaBinaria){
-                    MostrarGraficoBinario((ConsultaBinaria)auxConsultas.getConsulta(i));
-                }
-                if(auxConsultas.getConsulta(i) instanceof ConsultaMultiple){
-                   MostrarGraficoMultiple((ConsultaMultiple)auxConsultas.getConsulta(i));
-                }
+        if (botonConsultasSimple.isSelected()) {
+            String tema = (String) boxTemas.getSelectedItem();
+            String idConsulta = (String) boxID.getSelectedItem();
+            ConsultaBinaria auxConsulta = (ConsultaBinaria) manejo.buscarConsultaPorId(tema, idConsulta);
+            MostrarGraficoBinario(auxConsulta);
+        } else {
+            if (botonConsultasMultiples.isSelected()) {
+                String tema = (String) boxTemas.getSelectedItem();
+                String idConsulta = (String) boxID.getSelectedItem();
+                ConsultaMultiple auxConsulta = (ConsultaMultiple) manejo.buscarConsultaPorId(tema, idConsulta);
+                MostrarGraficoMultiple(auxConsulta);
             }
         }
     }//GEN-LAST:event_graficarConsultaActionPerformed
 
-    public void MostrarGraficoMultiple(ConsultaMultiple auxConsulta){
-        RespuestaMultiple aux = new RespuestaMultiple();
+    public void MostrarGraficoMultiple(ConsultaMultiple auxConsulta) {
+        RespuestaMultiple aux;
         nombreTemaConsulta.setText(auxConsulta.getTituloConsulta());
         nombreConsulta.setText(auxConsulta.getDescripcion());
-        aux = (RespuestaMultiple)auxConsulta.getRespuestasConsulta();
+        aux = (RespuestaMultiple) auxConsulta.getRespuestasConsulta();
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         datos.setValue(aux.getmFavor(), "Muy a Favor", "");
         datos.setValue(aux.getaFavor(), "Favor", "");
-        datos.setValue(aux.getNeutro(), "Neutro","");
-        datos.setValue(aux.getContra(), "Contra","");
-        datos.setValue(aux.getmContra(), "Muy En Contra","");
-        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica de votos", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
+        datos.setValue(aux.getNeutro(), "Neutro", "");
+        datos.setValue(aux.getContra(), "Contra", "");
+        datos.setValue(aux.getmContra(), "Muy En Contra", "");
+        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica de votos", "", "Cantidad", datos, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel panel = new ChartPanel(graficoBarras);
-        panel.setPreferredSize(new Dimension(400,300));
+        panel.setPreferredSize(new Dimension(400, 300));
         panelGrafico.setLayout(new BorderLayout());
-        panelGrafico.add(panel,BorderLayout.NORTH);
+        panelGrafico.add(panel, BorderLayout.NORTH);
         pack();
         repaint();
     }
-    
-    public void MostrarGraficoBinario(ConsultaBinaria auxConsulta){
-        RespuestaBinaria aux = new RespuestaBinaria();
-        String descripcion,titulo;
+
+    public void MostrarGraficoBinario(ConsultaBinaria auxConsulta) {
+        RespuestaBinaria aux;
+        String descripcion, titulo;
         nombreTemaConsulta.setText(auxConsulta.getTituloConsulta());
         nombreConsulta.setText(auxConsulta.getDescripcion());
-        aux = (RespuestaBinaria)auxConsulta.getRespuestasConsulta();
+        aux = (RespuestaBinaria) auxConsulta.getRespuestasConsulta();
         DefaultCategoryDataset datos = new DefaultCategoryDataset();
         datos.setValue(aux.getLikes(), "Likes", "");
         datos.setValue(aux.getDisLikes(), "Dislikes", "");
-        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica de votos", "", "Cantidad", datos,PlotOrientation.VERTICAL,true,true,false);
+        JFreeChart graficoBarras = ChartFactory.createBarChart3D("Estadistica de votos", "", "Cantidad", datos, PlotOrientation.VERTICAL, true, true, false);
         ChartPanel panel = new ChartPanel(graficoBarras);
-        panel.setPreferredSize(new Dimension(400,300));
+        panel.setPreferredSize(new Dimension(400, 300));
         panelGrafico.setLayout(new BorderLayout());
-        panelGrafico.add(panel,BorderLayout.NORTH);
+        panelGrafico.add(panel, BorderLayout.NORTH);
         pack();
         repaint();
     }
-    
+
     private void volverMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_volverMenuPrincipalActionPerformed
         // TODO add your handling code here:0
         this.setVisible(false);
@@ -268,8 +297,14 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
     }//GEN-LAST:event_volverMenuPrincipalActionPerformed
 
     private void boxTemasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTemasItemStateChanged
-        String tema= (String)(boxTemas.getSelectedItem());
-        mostrarIds(tema);
+        String tema = (String) (boxTemas.getSelectedItem());
+        if (botonConsultasSimple.isSelected())
+            mostrarIdsBinarias(tema);
+        else {
+            if (botonConsultasMultiples.isSelected()) {
+                mostrarIdsMultiples(tema);
+            }
+        }
     }//GEN-LAST:event_boxTemasItemStateChanged
 
     private void boxTemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_boxTemasActionPerformed
@@ -280,18 +315,44 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
 
     }//GEN-LAST:event_boxIDActionPerformed
 
-    
-    public void mostrarTemas(){
-        HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
-        
-        for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
-                boxTemas.addItem(set.getKey());   
+    private void botonConsultasMultiplesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultasMultiplesActionPerformed
+        this.boxTemas.removeAllItems();
+        this.mostrarTemasMultiples();
+    }//GEN-LAST:event_botonConsultasMultiplesActionPerformed
+
+    private void botonConsultasSimpleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonConsultasSimpleActionPerformed
+        this.boxTemas.removeAllItems();
+        this.mostrarTemasBinarios();
+    }//GEN-LAST:event_botonConsultasSimpleActionPerformed
+
+    public void mostrarTemasBinarios() {
+        HashMap<String, ArrayListConsultas> auxMapa = manejo.getConsultasBinarias();
+        for (Map.Entry<String, ArrayListConsultas> set : auxMapa.entrySet()) {
+            if (this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0) {
+                boxTemas.addItem(set.getKey());
+            }
         }
     }
-    
-    public void mostrarIds(String tema){
-        ArrayListConsultas arrayListdeIDs= manejo.getConsultasPorTema(tema);
+
+    public void mostrarIdsBinarias(String tema) {
+        ArrayListConsultas arrayListdeIDs = manejo.getConsultasBinariasPorTema(tema);
+        boxID.removeAllItems();
+        for (int i = 0; i < arrayListdeIDs.sizeConsultas(); i++) {
+            boxID.addItem(Integer.toString(arrayListdeIDs.getConsulta(i).getIdConsulta()));
+        }
+    }
+
+    public void mostrarTemasMultiples() {
+        HashMap<String, ArrayListConsultas> auxMapa = manejo.getConsultasMultiples();
+        for (Map.Entry<String, ArrayListConsultas> set : auxMapa.entrySet()) {
+            if (this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0) {
+                boxTemas.addItem(set.getKey());
+            }
+        }
+    }
+
+    public void mostrarIdsMultiples(String tema) {
+        ArrayListConsultas arrayListdeIDs = manejo.getConsultasMultiplesPorTema(tema);
         boxID.removeAllItems();
         for (int i = 0; i < arrayListdeIDs.sizeConsultas(); i++) {
             boxID.addItem(Integer.toString(arrayListdeIDs.getConsulta(i).getIdConsulta()));
@@ -299,8 +360,11 @@ public class VentanaMostrarGrafico extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JRadioButton botonConsultasMultiples;
+    private javax.swing.JRadioButton botonConsultasSimple;
     private javax.swing.JComboBox boxID;
     private javax.swing.JComboBox boxTemas;
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JLabel descripcionConsulta;
     private javax.swing.JButton graficarConsulta;
     private javax.swing.JLabel jLabel1;

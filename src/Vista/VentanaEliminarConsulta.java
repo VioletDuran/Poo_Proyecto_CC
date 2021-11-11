@@ -143,7 +143,7 @@ public class VentanaEliminarConsulta extends javax.swing.JFrame {
     private void botonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEliminarActionPerformed
         String temaBuscado = (String)boxTemas.getSelectedItem();
         int idConsulta = Integer.parseInt((String)boxID.getSelectedItem());
-        manejo.getArray(temaBuscado).removeConsulta(manejo.buscarConsulta(temaBuscado,idConsulta));
+        manejo.eliminarConsulta(temaBuscado,idConsulta);
         this.setVisible(false);     
     }//GEN-LAST:event_botonEliminarActionPerformed
 
@@ -164,7 +164,7 @@ public class VentanaEliminarConsulta extends javax.swing.JFrame {
         HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
         
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+            if(this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0)
                 boxTemas.addItem(set.getKey());
         
         }

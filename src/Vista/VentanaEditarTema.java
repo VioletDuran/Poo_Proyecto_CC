@@ -22,6 +22,7 @@ public class VentanaEditarTema extends javax.swing.JFrame {
      */
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
+    private VentanaErrorField error;
     
     public VentanaEditarTema(ManejoDeColecciones manejo , JFrame menu) {
         initComponents();
@@ -34,7 +35,7 @@ public class VentanaEditarTema extends javax.swing.JFrame {
         HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
         
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+            if(this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0)
                 boxTemas.addItem(set.getKey()); 
         }
     }
@@ -133,9 +134,16 @@ public class VentanaEditarTema extends javax.swing.JFrame {
 
     private void botonEditarTemaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarTemaActionPerformed
         String temaAEditar = (String)boxTemas.getSelectedItem();
-        this.manejo.EditarTema(temaAEditar , textoTema.getText());
-        this.setVisible(false);
-        this.dispose();
+        if(textoTema.getText().length() > 0)
+        {
+            this.manejo.EditarTema(temaAEditar , textoTema.getText());
+            this.setVisible(false);
+            this.dispose();
+        }
+        else{
+            this.error = new VentanaErrorField("Ingrese un tema valido");
+            this.error.setVisible(true);
+        }
     }//GEN-LAST:event_botonEditarTemaActionPerformed
 
     

@@ -16,13 +16,14 @@ import javax.swing.JFrame;
  * Clase VentanaEditarPregunta:
  * Interfaz grafica la cual se ocupa para editar una consulta.
  */
-public class VentanaEditarPregunta extends javax.swing.JFrame {
+public class VentanaEditarConsulta extends javax.swing.JFrame {
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
+    private VentanaErrorField error;
     /**
      * Creates new form VentanaEditarPregunta
      */
-    public VentanaEditarPregunta(ManejoDeColecciones manejo, JFrame menu) {
+    public VentanaEditarConsulta(ManejoDeColecciones manejo, JFrame menu) {
         initComponents();
         this.manejo = manejo;
         this.menuPrincipal = menu;
@@ -156,9 +157,17 @@ public class VentanaEditarPregunta extends javax.swing.JFrame {
     private void botonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonEditarActionPerformed
         String temaBuscado = (String)boxTemas.getSelectedItem();
         int idConsulta = Integer.parseInt((String)boxID.getSelectedItem());
-        manejo.editarConsulta(temaBuscado,idConsulta,titulo.getText(),textoDescripcionConsulta.getText());
-        this.setVisible(false);
-        this.dispose();
+        if(titulo.getText().length() > 0 && textoDescripcionConsulta.getText().length() > 0){
+            manejo.editarConsulta(temaBuscado,idConsulta,titulo.getText(),textoDescripcionConsulta.getText());
+            this.setVisible(false);
+            this.dispose();
+        }
+        else{
+            this.error = new VentanaErrorField("Ingrese un titulo y descripcion validos");
+            this.error.setVisible(true);
+        }
+        
+ 
     }//GEN-LAST:event_botonEditarActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
@@ -180,16 +189,16 @@ public class VentanaEditarPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_boxIDActionPerformed
 
     public void mostrarTemas(){
-        HashMap<String,ArrayListConsultas> auxMapa= manejo.getConsultas();
+        HashMap<String,ArrayListConsultas> auxMapa = manejo.getConsultas();
         
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+            if(this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0)
                 boxTemas.addItem(set.getKey());   
         }
     }
     
     public void mostrarIds(String tema){
-        ArrayListConsultas arrayListdeIDs= manejo.getConsultasPorTema(tema);
+        ArrayListConsultas arrayListdeIDs = manejo.getConsultasPorTema(tema);
         boxID.removeAllItems();
         for (int i = 0; i < arrayListdeIDs.sizeConsultas(); i++) {
             boxID.addItem(Integer.toString(arrayListdeIDs.getConsulta(i).getIdConsulta()));

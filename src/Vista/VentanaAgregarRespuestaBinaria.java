@@ -169,7 +169,7 @@ public class VentanaAgregarRespuestaBinaria extends javax.swing.JFrame {
     }//GEN-LAST:event_boxTemasActionPerformed
 
     private void boxTemasItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_boxTemasItemStateChanged
-        String tema= (String)(boxTemas.getSelectedItem());
+        String tema = (String)(boxTemas.getSelectedItem());
         mostrarIds(tema);
     }//GEN-LAST:event_boxTemasItemStateChanged
 
@@ -204,7 +204,7 @@ public class VentanaAgregarRespuestaBinaria extends javax.swing.JFrame {
         HashMap<String,ArrayListConsultas> auxMapa = manejo.getConsultasBinarias();
         
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+            if(this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0)
                 boxTemas.addItem(set.getKey());
         }
     }

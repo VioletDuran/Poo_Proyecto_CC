@@ -7,9 +7,7 @@ package Vista;
 
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 import javax.swing.JFrame;
 
 /**

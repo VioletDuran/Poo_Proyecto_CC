@@ -6,7 +6,6 @@
 package Vista;
 
 import Controlador.*;
-import Modelo.*;
 import javax.swing.JFrame;
 
 /**
@@ -198,7 +197,7 @@ public class VentanaAgregarConsulta extends javax.swing.JFrame {
         int auxIdConsulta;
         String auxTituloConsulta;
         
-        if (manejo.existeIdEnConsultas(fieldDeTema.getText(), Integer.parseInt(fieldDeIdConsulta.getText()))) {
+        if (manejo.existeIdEnConsultas(fieldDeTema.getText(), fieldDeIdConsulta.getText())) {
             this.error = new VentanaErrorField("Ya existe esta id, Ingrese otra");
             this.error.setVisible(true);
             return;

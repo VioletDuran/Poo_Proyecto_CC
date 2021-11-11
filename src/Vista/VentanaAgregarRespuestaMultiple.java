@@ -174,11 +174,7 @@ public class VentanaAgregarRespuestaMultiple extends javax.swing.JFrame {
     }//GEN-LAST:event_botonMenuPrincipalActionPerformed
 
     private void botonOKActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonOKActionPerformed
-        /*if(botonEnDesacuerdo.isSelected()){
-            manejo.agregarRespuestaBinaria((String)boxTemas.getSelectedItem(),(String)boxID.getSelectedItem(), true);
-        }else{
-            manejo.agregarRespuestaBinaria((String)boxTemas.getSelectedItem(),(String)boxID.getSelectedItem(), false);
-        }*/
+
         switch ((String)(boxVoto.getSelectedItem())){
             case "Muy a favor":
                 manejo.agregarRespuesta((String)boxTemas.getSelectedItem(),(String)boxID.getSelectedItem(), 5);  
@@ -212,7 +208,7 @@ public class VentanaAgregarRespuestaMultiple extends javax.swing.JFrame {
     public void mostrarTemas(){
         HashMap<String,ArrayListConsultas> auxMapa = manejo.getConsultasMultiples();
         for(Map.Entry<String,ArrayListConsultas> set: auxMapa.entrySet()){
-            if(this.manejo.getArray(set.getKey()).sizeConsultas() != 0)
+            if(this.manejo.getArrayCopia(set.getKey()).sizeConsultas() != 0)
                 boxTemas.addItem(set.getKey());
         }
     }
