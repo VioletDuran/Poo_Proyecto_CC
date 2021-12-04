@@ -7,6 +7,7 @@ package Vista;
 
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
+import Modelo.ErrorTemaRepetidoException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JFrame;
@@ -136,9 +137,16 @@ public class VentanaEditarTema extends javax.swing.JFrame {
         String temaAEditar = (String)boxTemas.getSelectedItem();
         if(textoTema.getText().length() > 0)
         {
-            this.manejo.EditarTema(temaAEditar , textoTema.getText());
-            this.setVisible(false);
-            this.dispose();
+            try{
+                this.manejo.EditarTema(temaAEditar , textoTema.getText());
+                this.setVisible(false);
+                this.dispose();
+            }
+            catch(ErrorTemaRepetidoException e){
+                this.error = new VentanaErrorField("EL TEMA INGRESADO YA EXISTE");
+                this.error.setVisible(true);
+            }
+            
         }
         else{
             this.error = new VentanaErrorField("Ingrese un tema valido");

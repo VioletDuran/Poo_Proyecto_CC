@@ -22,7 +22,7 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
  * Clase ReporteTema:
  * Especializada en crear Txt y Excel de temas.
  */
-public class ReporteTema implements Reportable{
+public class ReporteTema implements ReportableStrategy{
 
     /**
      * Atributos:
@@ -44,26 +44,23 @@ public class ReporteTema implements Reportable{
      * Se crea el txt.
      */
     @Override
-    public void generarTxt() {
-        String filePath =  "./TemasTxt.txt";
+    public void generarTxt() throws IOException {
+        String filePath = "./TemasTxt.txt";
         File file = new File(filePath);
-        try {
-            FileWriter fw = new FileWriter(file);
-            BufferedWriter bw = new BufferedWriter(fw);
-            for (int i = 0; i < tablaTema.getRowCount(); i++) {
-                for (int j = 0; j < tablaTema.getColumnCount(); j++) {
-                    if (tablaTema.getValueAt(i, j) != null) {
-                        bw.write(tablaTema.getValueAt(i, j).toString() + ", ");
-                    }
+
+        FileWriter fw = new FileWriter(file);
+        BufferedWriter bw = new BufferedWriter(fw);
+        for (int i = 0; i < tablaTema.getRowCount(); i++) {
+            for (int j = 0; j < tablaTema.getColumnCount(); j++) {
+                if (tablaTema.getValueAt(i, j) != null) {
+                    bw.write(tablaTema.getValueAt(i, j).toString() + ", ");
                 }
-                bw.write("\n");
             }
-            bw.close();
-            fw.close();
-            return;
-        } catch (IOException ex) {
-            System.out.println(ex);
+            bw.write("\n");
         }
+        bw.close();
+        fw.close();
+        return;
     }
 
      /**
@@ -71,36 +68,31 @@ public class ReporteTema implements Reportable{
      * Se crea el Excel.
      */
     @Override
-    public void generarExcel() {
-        try {
-            Workbook wb = new XSSFWorkbook();
-            Sheet sheet = wb.createSheet("Data");
-            Row rowCol = sheet.createRow(0);
-            for (int i = 0; i < tablaTema.getColumnCount(); i++) {
-                Cell cell = rowCol.createCell(i);
-                cell.setCellValue(tablaTema.getColumnName(i));
-            }
-            for (int j = 0; j < tablaTema.getRowCount(); j++) {
-                Row row = sheet.createRow(j + 1);
-                for (int k = 0; k < tablaTema.getColumnCount(); k++) {
-                    Cell cell = row.createCell(k);
-                    if (tablaTema.getValueAt(j, k) != null) {
-                        cell.setCellValue(tablaTema.getValueAt(j, k).toString());
-                    }
+    public void generarExcel() throws IOException {
+        Workbook wb = new XSSFWorkbook();
+        Sheet sheet = wb.createSheet("Data");
+        Row rowCol = sheet.createRow(0);
+        for (int i = 0; i < tablaTema.getColumnCount(); i++) {
+            Cell cell = rowCol.createCell(i);
+            cell.setCellValue(tablaTema.getColumnName(i));
+        }
+        for (int j = 0; j < tablaTema.getRowCount(); j++) {
+            Row row = sheet.createRow(j + 1);
+            for (int k = 0; k < tablaTema.getColumnCount(); k++) {
+                Cell cell = row.createCell(k);
+                if (tablaTema.getValueAt(j, k) != null) {
+                    cell.setCellValue(tablaTema.getValueAt(j, k).toString());
                 }
             }
-
-            FileOutputStream out = new FileOutputStream(new File("Temas.Xlsx.xlsx"));
-         
-            wb.write(out);
-            wb.close();
-            out.close();
-            return;
-        } catch (FileNotFoundException e) {
-            System.out.println(e);
-        } catch (IOException io) {
-            System.out.println(io);
         }
+
+        FileOutputStream out = new FileOutputStream(new File("Temas.Xlsx.xlsx"));
+
+        wb.write(out);
+        wb.close();
+        out.close();
+        return;
+
     }
     
 }

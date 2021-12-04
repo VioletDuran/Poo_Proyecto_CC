@@ -101,7 +101,11 @@ public class ArrayListConsultas {
             consultas.get(i).setTituloTema(tema);
         }
     }
-    
+    /**
+     * Metodo getCopiaArraylist:
+     * se retorna una copia del arraylist que se desee
+     * @return Se retorna una copia del arraylist
+     */
     public ArrayListConsultas getCopiaArrayList( ){
        ArrayListConsultas aux = new ArrayListConsultas();
        for(int i = 0 ; i < this.consultas.size() ; i++){
@@ -110,8 +114,15 @@ public class ArrayListConsultas {
        return aux;
     }
     
+    /**
+     * Metodo editaTituloYDescripcion
+     * Se edita el arraylist
+     * @param tituloNuevo: Nuevo Titulo
+     * @param descripcionNueva: Nueva Descripcion
+     * @param idBuscada: id para buscar
+     */
     public void editaTituloYDescripcion(String tituloNuevo, String descripcionNueva, int idBuscada){
-        this.getConsulta(idBuscada).setTituloConsulta(tituloNuevo);
-        this.getConsulta(idBuscada).setDescripcion(descripcionNueva);
+        this.getConsultaPorId(idBuscada).setTituloConsulta(tituloNuevo);
+        this.getConsultaPorId(idBuscada).setDescripcion(descripcionNueva);
     }
 }

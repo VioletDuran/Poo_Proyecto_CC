@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.*;
+import java.io.IOException;
 
 /**
  * Clase MenuPrincipal:
@@ -30,6 +31,8 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private VentanaEditarTema editarTema;
     private VentanaAgregarTema agregarTema;
     private VentanaAgregarRespuestaMultiple agregarRespuestaM;
+    private VentanaErrorField ventanaAviso;
+    private ReportableStrategy reporteEstrategia;
     
     
     public MenuPrincipal(ManejoDeColecciones manejo) {
@@ -64,6 +67,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
         botonEditarTema = new javax.swing.JButton();
         botonAgregarTema = new javax.swing.JButton();
         botonRespuestaMultiple = new javax.swing.JButton();
+        reporteConsultaBinariaTxt = new javax.swing.JButton();
+        reporteConsultaBinariaExcel = new javax.swing.JButton();
+        reporteConsultaMultipleTxt = new javax.swing.JButton();
+        reporteConsultaMultipleXlsx = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
@@ -172,6 +179,34 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
         });
 
+        reporteConsultaBinariaTxt.setText("Reporte Consultas Binarias (txt)");
+        reporteConsultaBinariaTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteConsultaBinariaTxtActionPerformed(evt);
+            }
+        });
+
+        reporteConsultaBinariaExcel.setText("Reporte Consultas Binarias (xlsx)");
+        reporteConsultaBinariaExcel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteConsultaBinariaExcelActionPerformed(evt);
+            }
+        });
+
+        reporteConsultaMultipleTxt.setText("Reporte Consulta Multiple (txt)");
+        reporteConsultaMultipleTxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteConsultaMultipleTxtActionPerformed(evt);
+            }
+        });
+
+        reporteConsultaMultipleXlsx.setText("Reporte Consulta Multiple (xlsx)");
+        reporteConsultaMultipleXlsx.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                reporteConsultaMultipleXlsxActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,25 +219,30 @@ public class MenuPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(260, 260, 260)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 99, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(botonAgregarTema, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonEditarTema, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonEditarConsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonEliminarTema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonSalir, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonMostrarGrafico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonEliminarConsulta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonAgregarConsultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonAgregarRespuestaBinaria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonVerConsultaPorTema, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonVerTemas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonVerConsultas, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonConsultaTemaEID, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(botonRespuestaMultiple, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(195, 195, 195))
+                .addGap(0, 201, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(reporteConsultaMultipleTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reporteConsultaBinariaExcel, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(reporteConsultaBinariaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonMostrarGrafico, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEditarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEditarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEliminarTema, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonEliminarConsulta, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAgregarConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonRespuestaMultiple, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botonAgregarRespuestaBinaria, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(reporteConsultaMultipleXlsx, javax.swing.GroupLayout.DEFAULT_SIZE, 223, Short.MAX_VALUE)
+                        .addComponent(botonSalir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonAgregarTema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonVerConsultaPorTema, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonConsultaTemaEID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonVerTemas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(botonVerConsultas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGap(191, 191, 191))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -213,33 +253,41 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(botonVerConsultas, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(botonVerTemas)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonConsultaTemaEID)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonVerConsultaPorTema)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonAgregarTema)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonAgregarRespuestaBinaria)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonRespuestaMultiple)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonAgregarConsultas)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonEliminarConsulta)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonEliminarTema)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonEditarTema)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonEditarConsulta)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonMostrarGrafico)
-                .addGap(20, 20, 20)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reporteConsultaBinariaTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reporteConsultaBinariaExcel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reporteConsultaMultipleTxt)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(reporteConsultaMultipleXlsx)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(botonSalir)
-                .addGap(20, 20, 20))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         pack();
@@ -335,6 +383,60 @@ public class MenuPrincipal extends javax.swing.JFrame {
         this.agregarRespuestaM.mostrarVotos();
     }//GEN-LAST:event_botonRespuestaMultipleActionPerformed
 
+    private void reporteConsultaBinariaTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteConsultaBinariaTxtActionPerformed
+        // TODO add your handling code here:
+        try{
+            this.reporteEstrategia = new ReporteConsultaBinaria(manejo.matrizConsultasSimples("Reporte"));
+            this.reporteEstrategia.generarTxt();
+            this.ventanaAviso = new VentanaErrorField("Archivo txt generado con exito");
+            this.ventanaAviso.setVisible(true);
+        }
+        catch(IOException e){
+            this.ventanaAviso = new VentanaErrorField("NO SE A PODIDO GENERAR EL ARCHIVO");
+            this.ventanaAviso.setVisible(true);
+        }
+    }//GEN-LAST:event_reporteConsultaBinariaTxtActionPerformed
+
+    private void reporteConsultaBinariaExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteConsultaBinariaExcelActionPerformed
+        try{
+            this.reporteEstrategia = new ReporteConsultaBinaria(manejo.matrizConsultasSimples("Reporte"));
+            this.reporteEstrategia.generarExcel();
+            this.ventanaAviso = new VentanaErrorField("Archivo xlsx generado con exito");
+            this.ventanaAviso.setVisible(true);
+        }
+        catch(IOException e){
+            this.ventanaAviso = new VentanaErrorField("NO SE A PODIDO GENERAR EL ARCHIVO");
+            this.ventanaAviso.setVisible(true);
+        }
+    }//GEN-LAST:event_reporteConsultaBinariaExcelActionPerformed
+
+    private void reporteConsultaMultipleTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteConsultaMultipleTxtActionPerformed
+        try{
+            this.reporteEstrategia = new ReporteConsultaMultiple(manejo.matrizConsultasMultiple("reporte"));
+            this.reporteEstrategia.generarTxt();
+            this.ventanaAviso = new VentanaErrorField("Archivo txt generado con exito");
+            this.ventanaAviso.setVisible(true);
+        }
+        catch(IOException e){
+            this.ventanaAviso = new VentanaErrorField("NO SE A PODIDO GENERAR EL ARCHIVO");
+            this.ventanaAviso.setVisible(true);
+        }
+    }//GEN-LAST:event_reporteConsultaMultipleTxtActionPerformed
+
+    private void reporteConsultaMultipleXlsxActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_reporteConsultaMultipleXlsxActionPerformed
+        try{
+            this.reporteEstrategia = new ReporteConsultaMultiple(manejo.matrizConsultasMultiple("reporte"));
+            this.reporteEstrategia.generarExcel();
+            this.ventanaAviso = new VentanaErrorField("Archivo xlsx generado con exito");
+            this.ventanaAviso.setVisible(true);
+        }
+        catch(IOException e){
+            this.ventanaAviso = new VentanaErrorField("NO SE A PODIDO GENERAR EL ARCHIVO");
+            this.ventanaAviso.setVisible(true);
+        }
+    }//GEN-LAST:event_reporteConsultaMultipleXlsxActionPerformed
+
+    
 
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -354,5 +456,9 @@ public class MenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JButton botonVerTemas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton reporteConsultaBinariaExcel;
+    private javax.swing.JButton reporteConsultaBinariaTxt;
+    private javax.swing.JButton reporteConsultaMultipleTxt;
+    private javax.swing.JButton reporteConsultaMultipleXlsx;
     // End of variables declaration//GEN-END:variables
 }

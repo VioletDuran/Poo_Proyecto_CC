@@ -5,6 +5,7 @@
  */
 package Vista;
 
+import Modelo.ErrorTemaRepetidoException;
 import Controlador.ManejoDeColecciones;
 import Modelo.ArrayListConsultas;
 import java.util.*;
@@ -172,13 +173,30 @@ public class VentanaMostrarConFiltro extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonVolverMenuActionPerformed
 
+    /**
+     * Metodo RevisarTemas
+     * Metodo especificado para revisar si se ingresa un tema repetido.
+     * @param tema1: tema a revisar
+     * @param tema2: segundo tema a revisar
+     * @throws ErrorTemaRepetidoException 
+     */
+    public void RevisarTemas(String tema1, String tema2) throws ErrorTemaRepetidoException{
+        if(tema1.equals(tema2)){
+            throw new ErrorTemaRepetidoException();
+        }else{
+            mostrarCosultas();
+        }
+            
+        
+    }
     private void botonMostrarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarConsultasActionPerformed
-        if (((String)boxTemas.getSelectedItem()).equals((String)boxTemas2.getSelectedItem()) ) {
+
+        try {
+            RevisarTemas((String) boxTemas.getSelectedItem(), (String) boxTemas2.getSelectedItem());
+        } catch (ErrorTemaRepetidoException e) {
             this.error = new VentanaErrorField("Se ha seleccionado un tema repetido.");
             this.error.setVisible(true);
             return;
-        }else{
-           mostrarCosultas(); 
         }
         
     }//GEN-LAST:event_botonMostrarConsultasActionPerformed

@@ -5,11 +5,13 @@
  */
 package Vista;
 
+import java.io.IOException;
+
 /**
  * Clase de tipo Interfaz:
  * Utilizada para los tipos de reportes.
  */
-public interface Reportable {
-    public void generarTxt();
-    public void generarExcel();
+public interface ReportableStrategy {
+    public void generarTxt() throws IOException;;
+    public void generarExcel() throws IOException;;
 }

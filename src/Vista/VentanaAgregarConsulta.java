@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.*;
+import Modelo.ErrorIdException;
 import javax.swing.JFrame;
 
 /**
@@ -196,23 +197,28 @@ public class VentanaAgregarConsulta extends javax.swing.JFrame {
         String auxDescripcion;
         int auxIdConsulta;
         String auxTituloConsulta;
-        
-        if (manejo.existeIdEnConsultas(fieldDeTema.getText(), fieldDeIdConsulta.getText())) {
-            this.error = new VentanaErrorField("Ya existe esta id, Ingrese otra");
-            this.error.setVisible(true);
-            return;
-        }
-        
+  
         auxTema = fieldDeTema.getText();
         auxDescripcion = fieldDescripcionConsulta.getText();
         auxIdConsulta = Integer.parseInt(fieldDeIdConsulta.getText());
         auxTituloConsulta = fieldTituloConsulta.getText();
-        if(botonConsultaSimple.isSelected()){
-            manejo.agregarConsulta(auxTema, auxIdConsulta, auxTituloConsulta, auxDescripcion, botonConsultaSimple.isSelected());
-        }
-        else{
-            if(botonConsultaMultiple.isSelected())
+        
+        try {
+            auxTema = fieldDeTema.getText();
+            auxDescripcion = fieldDescripcionConsulta.getText();
+            auxIdConsulta = Integer.parseInt(fieldDeIdConsulta.getText());
+            auxTituloConsulta = fieldTituloConsulta.getText();
+            if (botonConsultaSimple.isSelected()) {
                 manejo.agregarConsulta(auxTema, auxIdConsulta, auxTituloConsulta, auxDescripcion, botonConsultaSimple.isSelected());
+            } else {
+                if (botonConsultaMultiple.isSelected()) {
+                    manejo.agregarConsulta(auxTema, auxIdConsulta, auxTituloConsulta, auxDescripcion, botonConsultaSimple.isSelected());
+                }
+            }
+        } catch (ErrorIdException xd) {
+            this.error = new VentanaErrorField("Ya existe esta id, Ingrese otra");
+            this.error.setVisible(true);
+            return;
         }
             
         

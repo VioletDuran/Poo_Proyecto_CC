@@ -17,9 +17,6 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
     private JFrame editarConsulta;
-    private VentanaErrorField aviso;
-    private Reportable reporte;
-
     /**
      * Creates new form VentanaConsultas
      */
@@ -44,8 +41,6 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaConsultas = new javax.swing.JTable();
         botonVolverAlMenu = new javax.swing.JButton();
-        botonGenerarExel = new javax.swing.JButton();
-        botonGenerarTxt = new javax.swing.JButton();
         botonConsultasSimple = new javax.swing.JRadioButton();
         botonConsultasMultiples = new javax.swing.JRadioButton();
         botonMostrarConsultas = new javax.swing.JButton();
@@ -76,20 +71,6 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
             }
         });
 
-        botonGenerarExel.setText("Generar Excel");
-        botonGenerarExel.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGenerarExelActionPerformed(evt);
-            }
-        });
-
-        botonGenerarTxt.setText("Generar txt");
-        botonGenerarTxt.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                botonGenerarTxtActionPerformed(evt);
-            }
-        });
-
         botonTipoConsulta.add(botonConsultasSimple);
         botonConsultasSimple.setText("Mostrar Consultas Simple");
 
@@ -108,14 +89,6 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(60, 60, 60)
-                .addComponent(botonVolverAlMenu)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonGenerarTxt)
-                .addGap(256, 256, 256)
-                .addComponent(botonGenerarExel)
-                .addGap(91, 91, 91))
-            .addGroup(layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1013, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
@@ -126,8 +99,13 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(botonMostrarConsultas)
-                .addGap(438, 438, 438))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonMostrarConsultas)
+                        .addGap(438, 438, 438))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(botonVolverAlMenu)
+                        .addGap(444, 444, 444))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -139,12 +117,9 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botonConsultasSimple)
                     .addComponent(botonConsultasMultiples))
-                .addGap(33, 33, 33)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(botonVolverAlMenu)
-                    .addComponent(botonGenerarExel)
-                    .addComponent(botonGenerarTxt))
-                .addContainerGap())
+                .addGap(18, 18, 18)
+                .addComponent(botonVolverAlMenu)
+                .addGap(28, 28, 28))
         );
 
         pack();
@@ -157,21 +132,8 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_botonVolverAlMenuActionPerformed
 
-    private void botonGenerarExelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarExelActionPerformed
-        reporte = new ReporteConsulta(tablaConsultas);
-        reporte.generarExcel();
-        this.aviso = new VentanaErrorField("Excel realizado con exito!");
-        this.aviso.setVisible(true);
-    }//GEN-LAST:event_botonGenerarExelActionPerformed
-
-    private void botonGenerarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarTxtActionPerformed
-        reporte = new ReporteConsulta(tablaConsultas);
-        reporte.generarTxt();
-        this.aviso = new VentanaErrorField("Txt realizado con exito!");
-        this.aviso.setVisible(true);
-    }//GEN-LAST:event_botonGenerarTxtActionPerformed
-
     private void botonMostrarConsultasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonMostrarConsultasActionPerformed
+
         if (botonConsultasSimple.isSelected()) {
             tablaConsultas.setModel(new javax.swing.table.DefaultTableModel(
                     manejo.matrizConsultasSimples(),
@@ -195,8 +157,6 @@ public class VentanaMostrarConsultas extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JRadioButton botonConsultasMultiples;
     private javax.swing.JRadioButton botonConsultasSimple;
-    private javax.swing.JButton botonGenerarExel;
-    private javax.swing.JButton botonGenerarTxt;
     private javax.swing.JButton botonMostrarConsultas;
     private javax.swing.ButtonGroup botonTipoConsulta;
     private javax.swing.JButton botonVolverAlMenu;

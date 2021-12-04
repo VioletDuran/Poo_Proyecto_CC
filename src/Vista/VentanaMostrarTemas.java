@@ -6,6 +6,7 @@
 package Vista;
 
 import Controlador.ManejoDeColecciones;
+import java.io.IOException;
 import javax.swing.JFrame;
 
 /**
@@ -15,7 +16,7 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
 
     private ManejoDeColecciones manejo;
     private JFrame menuPrincipal;
-    private Reportable reporte;
+    private ReportableStrategy reporte;
     private VentanaErrorField aviso;
 
     /**
@@ -131,17 +132,31 @@ public class VentanaMostrarTemas extends javax.swing.JFrame {
     }//GEN-LAST:event_botonVolverMenuActionPerformed
 
     private void botonGenerarTxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGenerarTxtActionPerformed
-        reporte = new ReporteTema(tablaTemas);
-        reporte.generarExcel();
-        this.aviso = new VentanaErrorField("Txt realizado con exito!");
-        this.aviso.setVisible(true);
+        try{
+            reporte = new ReporteTema(tablaTemas);
+            reporte.generarTxt();
+            this.aviso = new VentanaErrorField("Txt realizado con exito!");
+            this.aviso.setVisible(true);
+        }
+        catch(IOException e){
+            this.aviso = new VentanaErrorField("NO SE A PODIDO GENERAR EL ARCHIVO");
+            this.aviso.setVisible(true);
+        }
     }//GEN-LAST:event_botonGenerarTxtActionPerformed
 
     private void botonGeneralExcelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonGeneralExcelActionPerformed
-        reporte = new ReporteTema(tablaTemas);
-        reporte.generarTxt();
-        this.aviso = new VentanaErrorField("Excel realizado con exito!");
-        this.aviso.setVisible(true);
+          try{
+            reporte = new ReporteTema(tablaTemas);
+            reporte.generarExcel();
+            this.aviso = new VentanaErrorField("Excel realizado con exito!");
+            this.aviso.setVisible(true);
+        }
+        catch(IOException e){
+            this.aviso = new VentanaErrorField("NO SE A PODIDO GENERAR EL ARCHIVO");
+            this.aviso.setVisible(true);
+        }
+        
+        
     }//GEN-LAST:event_botonGeneralExcelActionPerformed
 
     public void mostrarTemas() {

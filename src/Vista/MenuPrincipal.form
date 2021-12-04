@@ -35,27 +35,33 @@
                       <Component id="jLabel2" min="-2" pref="99" max="-2" attributes="0"/>
                   </Group>
               </Group>
-              <EmptySpace pref="23" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="botonAgregarTema" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonEditarTema" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonEditarConsulta" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonEliminarTema" alignment="0" max="32767" attributes="0"/>
-                  <Component id="botonSalir" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonMostrarGrafico" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonEliminarConsulta" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonAgregarConsultas" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonAgregarRespuestaBinaria" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonVerConsultaPorTema" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonVerTemas" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonVerConsultas" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonConsultaTemaEID" alignment="1" max="32767" attributes="0"/>
-                  <Component id="botonRespuestaMultiple" alignment="1" max="32767" attributes="0"/>
+              <EmptySpace min="0" pref="201" max="32767" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="reporteConsultaMultipleTxt" min="-2" pref="223" max="-2" attributes="0"/>
+                  <Component id="reporteConsultaBinariaExcel" min="-2" pref="223" max="-2" attributes="0"/>
+                  <Component id="reporteConsultaBinariaTxt" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonMostrarGrafico" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonEditarConsulta" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonEditarTema" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonEliminarTema" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonEliminarConsulta" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonAgregarConsultas" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonRespuestaMultiple" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Component id="botonAgregarRespuestaBinaria" min="-2" pref="221" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="reporteConsultaMultipleXlsx" pref="223" max="32767" attributes="0"/>
+                      <Component id="botonSalir" alignment="0" max="32767" attributes="0"/>
+                      <Component id="botonAgregarTema" max="32767" attributes="0"/>
+                      <Component id="botonVerConsultaPorTema" alignment="0" max="32767" attributes="0"/>
+                      <Component id="botonConsultaTemaEID" alignment="0" max="32767" attributes="0"/>
+                      <Component id="botonVerTemas" alignment="0" max="32767" attributes="0"/>
+                      <Component id="botonVerConsultas" alignment="0" max="32767" attributes="0"/>
+                  </Group>
               </Group>
-              <EmptySpace min="-2" pref="195" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="191" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -68,33 +74,41 @@
               <Component id="jLabel2" min="-2" pref="22" max="-2" attributes="0"/>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="botonVerConsultas" min="-2" pref="24" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Component id="botonVerTemas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonConsultaTemaEID" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonVerConsultaPorTema" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonAgregarTema" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonAgregarRespuestaBinaria" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonRespuestaMultiple" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonAgregarConsultas" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonEliminarConsulta" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonEliminarTema" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonEditarTema" min="-2" max="-2" attributes="0"/>
-              <EmptySpace pref="20" max="32767" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonEditarConsulta" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonMostrarGrafico" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Component id="reporteConsultaBinariaTxt" min="-2" pref="25" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Component id="reporteConsultaBinariaExcel" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Component id="reporteConsultaMultipleTxt" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
+              <Component id="reporteConsultaMultipleXlsx" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" max="32767" attributes="0"/>
               <Component id="botonSalir" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
+              <EmptySpace pref="33" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -226,6 +240,38 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonRespuestaMultipleActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="reporteConsultaBinariaTxt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reporte Consultas Binarias (txt)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteConsultaBinariaTxtActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="reporteConsultaBinariaExcel">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reporte Consultas Binarias (xlsx)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteConsultaBinariaExcelActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="reporteConsultaMultipleTxt">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reporte Consulta Multiple (txt)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteConsultaMultipleTxtActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JButton" name="reporteConsultaMultipleXlsx">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Reporte Consulta Multiple (xlsx)"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="reporteConsultaMultipleXlsxActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>

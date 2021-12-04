@@ -146,22 +146,27 @@ public class ManejoDeColecciones {
      * @param descripcionConsulta: descripcion de la consulta a ingresar.
      * @param tipoConsulta: Booleano para saber si la consulta es Multiple o
      * Binaria.
+     * @throws Modelo.ErrorIdException
      */
-    public void agregarConsulta(String tema, int idConsulta, String tituloConsulta, String descripcionConsulta, boolean tipoConsulta) {
-        if (tipoConsulta == true) {
-            Consulta auxConsulta = new ConsultaBinaria();
-            auxConsulta.setTituloTema(tema);
-            auxConsulta.setIdConsulta(idConsulta);
-            auxConsulta.setTituloConsulta(tituloConsulta);
-            auxConsulta.setDescripcion(descripcionConsulta);
-            agregarConsulta(auxConsulta);
+    public void agregarConsulta(String tema, int idConsulta, String tituloConsulta, String descripcionConsulta, boolean tipoConsulta) throws ErrorIdException {
+        if(this.existeIdEnConsultas(tema, Integer.toString(idConsulta))){
+            throw new ErrorIdException();
         } else {
-            Consulta auxConsulta = new ConsultaMultiple();
-            auxConsulta.setTituloTema(tema);
-            auxConsulta.setIdConsulta(idConsulta);
-            auxConsulta.setTituloConsulta(tituloConsulta);
-            auxConsulta.setDescripcion(descripcionConsulta);
-            agregarConsulta(auxConsulta);
+            if (tipoConsulta == true) {
+                Consulta auxConsulta = new ConsultaBinaria();
+                auxConsulta.setTituloTema(tema);
+                auxConsulta.setIdConsulta(idConsulta);
+                auxConsulta.setTituloConsulta(tituloConsulta);
+                auxConsulta.setDescripcion(descripcionConsulta);
+                agregarConsulta(auxConsulta);
+            } else {
+                Consulta auxConsulta = new ConsultaMultiple();
+                auxConsulta.setTituloTema(tema);
+                auxConsulta.setIdConsulta(idConsulta);
+                auxConsulta.setTituloConsulta(tituloConsulta);
+                auxConsulta.setDescripcion(descripcionConsulta);
+                agregarConsulta(auxConsulta);
+            }
         }
     }
 
@@ -255,7 +260,7 @@ public class ManejoDeColecciones {
                 if (set.getValue().getConsulta(j) instanceof ConsultaMultiple) {
 
                     if (auxConsultasMultiples.containsKey(set.getValue().getConsulta(j).getTituloTema())) {
-                        this.consultas.get(set.getValue().getConsulta(j).getTituloTema()).setConsulta(set.getValue().getConsulta(j));
+                        auxConsultasMultiples.get(set.getValue().getConsulta(j).getTituloTema()).setConsulta(set.getValue().getConsulta(j));
                     } else {
                         ArrayListConsultas auxConsultas = new ArrayListConsultas();
                         auxConsultas.setConsulta(set.getValue().getConsulta(j));
@@ -269,17 +274,22 @@ public class ManejoDeColecciones {
         return auxConsultasMultiples;
     }
 
-    /**
-     * Metodo MatrizConsulta: Se retorna una matriz con los votos de la
-     * consulta.
-     *
-     * @return Se retorna una matriz con los votos de la consulta.
-     */
-    public String[][] matrizConsultasSimples() {
-        String matriz[][] = new String[tamMapa()][6];
+     /**
+     * Metodo matrizConsultasSimples: Metodo para realizar la matriz de consultas simples.
+     * return matriz: se retorna la matriz llena.
+     * */
+    public String[][] matrizConsultasSimples(String opcion) {
         HashMap<String, ArrayListConsultas> auxMapa = getConsultasBinarias();
         RespuestaBinaria respuestaBinaria;
-        int i = 0;
+        String matriz[][] = new String[contarConsultasEnMapa(auxMapa) + 1][6];
+        matriz[0][0] = "Tema";
+        matriz[0][1] = "ID";
+        matriz[0][2] = "Titulo Consulta";
+        matriz[0][3] = "Descripcion";
+        matriz[0][4] = "Likes";
+        matriz[0][5] = "Dislikes";
+        
+        int i = 1;
         for (Map.Entry<String, ArrayListConsultas> set : auxMapa.entrySet()) {
 
             for (int j = 0; j < set.getValue().sizeConsultas(); j++) {
@@ -298,18 +308,42 @@ public class ManejoDeColecciones {
         }
         return matriz;
     }
+    
+     /**
+     * Metodo matrizConsultasMultiple: Metodo para realizar la matriz de consultas multiples.
+     * return matriz: se retorna la matriz llena.
+     * */
+    public String[][] matrizConsultasSimples(){
+        HashMap<String, ArrayListConsultas> auxMapa = getConsultasBinarias();
+        String matriz[][] = new String[contarConsultasEnMapa(auxMapa)][6];
+        RespuestaBinaria respuestaBinaria;
+        int i = 0;
+        for (Map.Entry<String, ArrayListConsultas> set : auxMapa.entrySet()) {
+            for (int j = 0; j < set.getValue().sizeConsultas(); j++) {
+                matriz[i][0] = set.getKey(); // TEMA
+                matriz[i][1] = Integer.toString(set.getValue().getConsulta(j).getIdConsulta()); // ID
+                matriz[i][2] = set.getValue().getConsulta(j).getTituloConsulta(); // TITULO CONSULTA
+                matriz[i][3] = set.getValue().getConsulta(j).getDescripcion(); // DESCRIPCION
+
+                respuestaBinaria = (RespuestaBinaria) set.getValue().getConsulta(j).getRespuestasConsulta();
+                matriz[i][4] = Integer.toString(respuestaBinaria.getLikes());
+                matriz[i][5] = Integer.toString(respuestaBinaria.getDisLikes());
+
+                i++;
+            }
+
+        }
+        return matriz;
+    }
 
     /**
-     * Metodo MatrizConsulta: Se retorna una matriz con los votos de la consulta
-     * Multiple.
-     *
-     * @return Se retorna una matriz con los votos de la consulta Multiple.
-     */
+     * Metodo matrizConsultasMultiple: Metodo para realizar la matriz de consultas multiples.
+     * return matriz: se retorna la matriz llena.
+     * */
     public String[][] matrizConsultasMultiple() {
-        String matriz[][] = new String[tamMapa()][9];
         HashMap<String, ArrayListConsultas> auxMapa = getConsultasMultiples();
+        String matriz[][] = new String[contarConsultasEnMapa(auxMapa)][9];
         RespuestaMultiple respuestsMultiple;
-
         int i = 0;
         for (Map.Entry<String, ArrayListConsultas> set : auxMapa.entrySet()) {
 
@@ -328,16 +362,69 @@ public class ManejoDeColecciones {
 
                 i++;
             }
-
         }
         return matriz;
+    }
+    
+  
+    /**
+     * Metodo matrizConsultasMultiple: Metodo para realizar la matriz de consultas multiples.
+     * @param opcion: opcion para ver cual es la sobreescritura.
+     * return matriz: se retorna la matriz llena.
+     * */
+    public String[][] matrizConsultasMultiple(String opcion) {
+        HashMap<String, ArrayListConsultas> auxMapa = getConsultasMultiples();
+        RespuestaMultiple respuestsMultiple;
+        String matriz[][] = new String[contarConsultasEnMapa(auxMapa) + 1][9];
 
+        matriz[0][0] = "Tema";
+        matriz[0][1] = "ID";
+        matriz[0][2] = "Titulo Consulta";
+        matriz[0][3] = "Descripcion";
+        matriz[0][4] = "Muy a favor";
+        matriz[0][5] = "A favor";
+        matriz[0][6] = "Neutro";
+        matriz[0][7] = "En contra";
+        matriz[0][8] = "Muy en contra";
+        
+        int i = 1;
+        for (Map.Entry<String, ArrayListConsultas> set : auxMapa.entrySet()) {
+
+            for (int j = 0; j < set.getValue().sizeConsultas(); j++) {
+                matriz[i][0] = set.getKey(); // TEMA
+                matriz[i][1] = Integer.toString(set.getValue().getConsulta(j).getIdConsulta()); // ID
+                matriz[i][2] = set.getValue().getConsulta(j).getTituloConsulta(); // TITULO CONSULTA
+                matriz[i][3] = set.getValue().getConsulta(j).getDescripcion(); // DESCRIPCION
+
+                respuestsMultiple = (RespuestaMultiple) set.getValue().getConsulta(j).getRespuestasConsulta();
+                matriz[i][4] = Integer.toString(respuestsMultiple.getmFavor()); // Opiniones Muy a favor 
+                matriz[i][5] = Integer.toString(respuestsMultiple.getaFavor()); // Opiniones a Favor
+                matriz[i][6] = Integer.toString(respuestsMultiple.getNeutro()); // Opiniones Neutras
+                matriz[i][7] = Integer.toString(respuestsMultiple.getContra()); // Opiniones en contra
+                matriz[i][8] = Integer.toString(respuestsMultiple.getmContra()); // Opiniones muy en contra/-*/   
+
+                i++;
+            }
+        }
+        return matriz;
+    }
+    
+    /**
+     * Metodo consultarConsultarEnMapa: Metodo para contar consultas totales de mapa.
+     * @param mapa: hashmap para poder contar las consultas.
+     * @return contador: el total de consultas contadas.
+     */    
+    public int contarConsultasEnMapa(HashMap<String, ArrayListConsultas> mapa){
+        int contador = 0;
+        for (Map.Entry<String, ArrayListConsultas> set : mapa.entrySet()) {
+            contador = contador + set.getValue().sizeConsultas();
+        }
+        return contador;
     }
 
     /**
      * Metodo existeIdEnConsultas: Se busca si existe la Key y el id buscada
      * dentro del HashMap.
-     *
      * @param key: String del tema a buscar.
      * @param idBuscada: id para buscar dentro del Arraylist para ver si existe.
      * @return Booleano dependiendo si es verdadero o falso.
@@ -348,9 +435,7 @@ public class ManejoDeColecciones {
             return false;
         else{
             return true;
-        }
-        
-     
+        } 
     }
 
     /**
@@ -465,7 +550,6 @@ public class ManejoDeColecciones {
 
     /**
      * Metodo EliminarTema: Se elimina el tema ingresado.
-     *
      * @param tema: String del tema a eliminar.
      */
     public void EliminarTema(String tema) {
@@ -474,11 +558,14 @@ public class ManejoDeColecciones {
 
     /**
      * Metodo EditarTema: Se edita el tema ingresado.
-     *
      * @param temaAEditar: String del tema a editar.
      * @param temaEditado: String del tema para reemplazar.
      */
-    public void EditarTema(String temaAEditar, String temaEditado) {
+    public void EditarTema(String temaAEditar, String temaEditado) throws ErrorTemaRepetidoException{
+        
+        if(consultas.get(temaEditado) != null){
+            throw new ErrorTemaRepetidoException();
+        }
         consultas.get(temaAEditar).editarTemaConsultas(temaEditado);
         ArrayListConsultas auxConsultas = consultas.get(temaAEditar).getCopiaArrayList();
         consultas.remove(temaAEditar);
@@ -487,7 +574,6 @@ public class ManejoDeColecciones {
 
     /**
      * Metodo AgregarTema: Se agrega un tema nuevo.
-     *
      * @param nuevoTema: String del tema a agregar.
      */
     public void AgregarTema(String nuevoTema) {
@@ -500,11 +586,10 @@ public class ManejoDeColecciones {
     /**
      * Metodo matrizTemas: Se busca todos los temas del HashMap y se crea una
      * matriz.
-     *
      * @return Se retorna la matriz llena.
      */
     public String[][] matrizTemas() {
-        String matriz[][] = new String[tamMapa()][6];
+        String matriz[][] = new String[consultas.size()][6];
         HashMap<String, ArrayListConsultas> auxMapa = getConsultas();
         int i = 0;
         for (Map.Entry<String, ArrayListConsultas> set : auxMapa.entrySet()) {
@@ -515,11 +600,8 @@ public class ManejoDeColecciones {
     }
 
     /**
-     * Metodo matrizTemasEId: Se busca el temas dentro del HashMap y las id
-     * entregadas y se crea una matriz.
-     *
-     * @param tema: String la cual es la key a buscar dentro del HashMap.
-     * @param id: id dentro del ArrayList de la consuta para buscar.
+     * Metodo MatrizMasVotos: Se realiza la matriz con la consulta con mas votos
+     * @param Consulta: Consulta con mas votos
      * @return Se retorna la matriz llena.
      */
     public String[][] matrizMasVotos(Consulta auxConsulta) {
@@ -532,7 +614,7 @@ public class ManejoDeColecciones {
         RespuestaBinaria respuestaBinaria;
         if (auxConsulta instanceof ConsultaMultiple) {
             
-            matriz = new String[tamMapa()][9];
+            matriz = new String[1][9];
             respuestsMultiple = (RespuestaMultiple) auxConsulta.getRespuestasConsulta();
 
             matriz[0][0] = Integer.toString(auxConsulta.getIdConsulta());
@@ -547,7 +629,7 @@ public class ManejoDeColecciones {
         }
         else{
             
-            matriz = new String[tamMapa()][6];
+            matriz = new String[1][6];
             respuestaBinaria = (RespuestaBinaria) auxConsulta.getRespuestasConsulta();
             
             matriz[0][0] = Integer.toString(auxConsulta.getIdConsulta());
@@ -563,13 +645,13 @@ public class ManejoDeColecciones {
     /**
      * Metodo matrizFiltrada : Se los temas dentro del HashMap y se realiza una
      * matriz.
-     *
      * @param tema1: String la cual es la key a buscar dentro del HashMap.
      * @param tema2: String la cual es la key a buscar dentro del HashMap.
      * @return Se retorna la matriz llena.
      */
     public String[][] matrizFiltrada(String tema1, String tema2) {
-        String matriz[][] = new String[tamMapa()][11];
+        int tam = contarConsultasPorTema(tema1) + contarConsultasPorTema(tema2);
+        String matriz[][] = new String[tam][11];
         HashMap<String, ArrayListConsultas> auxMapa = getConsultas();
         ArrayListConsultas arraylistFiltrado;
         arraylistFiltrado = getArrayCopia(tema1);
@@ -605,8 +687,17 @@ public class ManejoDeColecciones {
     }
     
     /**
-     * @param consultaAContar: Se recibe la consulta Binaria para contar votos
-     * @return Se retorna la cantidad total de votos.
+     * Metodo contarConsultasPorTema: metodo para contar las consultas totales por tema
+     * @param tema: contar por temas sus consultas.
+     * @return la cantidad de consultas del tema.
+     */
+    public int contarConsultasPorTema(String tema){
+        return consultas.get(tema).sizeConsultas();    
+    }
+    
+    /**Metodo contarVotosBinarios: Se recibe la consulta Binaria para contar votos
+     * @param consultaAContar: Consulta binaria para contar votos
+     * @return se retorna el contador de votos.
      */
     public int contarVotosBinarios(ConsultaBinaria consultaAContar){
         int contadorVotos = 0;
@@ -615,8 +706,8 @@ public class ManejoDeColecciones {
         return contadorVotos;
     }
     
-    /**
-     * @param consultaAContar: Se recibe la consulta Multiple para contar votos
+    /**Metodo contarVotosMultiples: 
+     * @param consultaAContar: recibe la consulta Multiple para contar votos
      * @return Se retorna la cantidad total de votos.
      */
     public int contarVotosMultiples(ConsultaMultiple consultaAContar){
@@ -626,7 +717,7 @@ public class ManejoDeColecciones {
         return contadorVotos;
     }
     
-    /**
+    /** Metodo ConsultaMasVotada: Metodo para realizar la matriz con la consulta mas votada.
      * @param TemaBuscado: Se recibe el string del tema buscado.
      * @return Se retorna la matriz llena en caso de que se encuentre el mas votado, si no se retorna null.
      */
@@ -656,7 +747,7 @@ public class ManejoDeColecciones {
         return matriz;
     } 
   
-    /**
+    /** Metodo eliminarConsulta: metodo realizado para eliminar una consulta
      * @param tema: Se recibe el tema a eliminar
      * @param id: Se recibe el id a eliminar
      */
@@ -664,7 +755,7 @@ public class ManejoDeColecciones {
         this.consultas.get(tema).removeConsulta(id);
     }
     
-    /**
+    /** Metodo buscarConsultaPorId: metodo realizado para buscar una consulta especifica por id
      * @param tema: Se recibe el tema a buscar.
      * @param id: Se recibe el id a buscar.
      * @return Se retorna la consulta deseada.
